@@ -1,4 +1,4 @@
-table 37072401 "AJ Shipping Header"
+table 37072410 "AJ Shipping Header Arch."
 {
     fields
     {
@@ -11,6 +11,9 @@ table 37072401 "AJ Shipping Header"
         field(20; "Created DateTime"; DateTime)
         {
             Caption = 'Nav Created DateTime';
+        }
+        field(21; "Ship Date"; Date)
+        {
         }
         field(30; "Shipped DateTime"; DateTime)
         {
@@ -144,9 +147,6 @@ table 37072401 "AJ Shipping Header"
         {
         }
         field(110; "Cancel After Date"; Date)
-        {
-        }
-        field(120; "Ship Date"; Date)
         {
         }
         field(130; "Hold Until Date"; Date)

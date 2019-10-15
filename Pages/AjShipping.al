@@ -221,6 +221,20 @@ page 37072402 "AJ Shipping"
     {
         area(processing)
         {
+            group("Archive")
+            {
+                action("Move to Archive")
+                {
+                    ApplicationArea = All;
+                    Promoted = false;
+                    Caption = 'Move to Archive';
+                    trigger OnAction()
+                    begin
+                        AJShippingProcess.MoveToArchive(Rec);
+                        Message('The document was moved to the archive');
+                    end;
+                }
+            }
             group("Filling")
             {
                 action("Get Sales Header")
@@ -294,5 +308,7 @@ page 37072402 "AJ Shipping"
             }
         }
     }
+    var
+        AJShippingProcess: Codeunit "AJ Fill Shipping Process";
 }
 

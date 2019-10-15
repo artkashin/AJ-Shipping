@@ -1,5 +1,27 @@
 codeunit 37072400 "AJ Fill Shipping Process"
 {
+    procedure MoveToArchive(AJShipHeader: Record "AJ Shipping Header")
+    var
+        AJShipLine: Record "AJ Shipping Line";
+        AJShipHeaderArch: Record "AJ Shipping Header Arch.";
+        AJShipLineArch: Record "AJ Shipping Line Arch.";
+    begin
+        AJShipHeaderArch.Init();
+        AJShipHeaderArch.TransferFields(AJShipHeader);
+        AJShipHeaderArch."Created DateTime" := CurrentDateTime();
+        AJShipHeaderArch.Insert(true);
+
+        AJShipLine.SetRange("Shipping No.", AJShipHeader."Shipping No.");
+        if AJShipLine.FindSet() then
+            repeat
+                AJShipLineArch.Init();
+                AJShipLineArch.TransferFields(AJShipLine);
+                AJShipLineArch.Insert();
+            until AJShipLine.Next() = 0;
+
+        AJShipHeader.Delete(true);
+    end;
+
     procedure PopulateShippingHeaderFromLine(AJShippingLine: Record "AJ Shipping Line")
     begin
         case AJShippingLine."Source Table" of
