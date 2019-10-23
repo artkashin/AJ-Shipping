@@ -25,7 +25,8 @@ pageextension 37072404 PageExtansion42 extends "Sales Order"
                         AJShippingLine.SetRange("Source ID", "No.");
                         if AJShippingLine.FindFirst() then begin
                             AJShippingHeader.get(AJShippingLine."Shipping No.");
-                            Page.Run(0, AJShippingHeader);
+                            if Confirm('AJ Shipping Header already exists for this order \\ would you like to open it?') then
+                                Page.Run(0, AJShippingHeader);
                         end
                         else
                             if Confirm('Create Aj Shipping?', true) then
