@@ -1,5 +1,7 @@
 table 37072401 "AJ Shipping Header"
 {
+    DrillDownPageId = "AJ Shipping";
+    LookupPageId = "AJ Shipping";
     fields
     {
         field(1; "Shipping No."; Code[20])
@@ -18,19 +20,16 @@ table 37072401 "AJ Shipping Header"
         field(30; "Shipped DateTime"; DateTime)
         {
         }
-        field(39; "Shp. Product Weight Unit"; Text[30])
+        field(40; "Product Weight"; Decimal)
         {
         }
-        field(40; "Shp. Product Weight"; Decimal)
+        field(41; "Product Width"; Decimal)
         {
         }
-        field(41; "Shp. Product Width"; Decimal)
+        field(42; "Product Length"; Decimal)
         {
         }
-        field(42; "Shp. Product Length"; Decimal)
-        {
-        }
-        field(43; "Shp. Product Height"; Decimal)
+        field(43; "Product Height"; Decimal)
         {
         }
         field(44; "Shp. Incoterms"; Text[30])
@@ -172,6 +171,9 @@ table 37072401 "AJ Shipping Header"
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
+        }
+        field(190; "International Shipment"; Boolean)
+        {
         }
     }
 

@@ -28,6 +28,10 @@ page 37072402 "AJ Shipping"
                             Message('Latest Ship date is ' + Format(DT2Date(dtm)));
                     end;
                 }
+                field("International Shipment"; "International Shipment")
+                {
+                    ApplicationArea = All;
+                }
             }
             group("Ship-from")
             {
@@ -187,28 +191,22 @@ page 37072402 "AJ Shipping"
             }
             group("Weight characteristics")
             {
-                field(AJWOH_PrdWgt; "Shp. Product Weight")
+                field(AJWOH_PrdWgt; "Product Weight")
                 {
                     ApplicationArea = All;
                     Caption = 'Product Weight';
                 }
-
-                field(AJWOH_PrdDim; "Shp. Product Weight Unit")
-                {
-                    ApplicationArea = All;
-
-                }
-                field(AJWOH_PrdW; "Shp. Product Width")
+                field(AJWOH_PrdW; "Product Width")
                 {
                     ApplicationArea = All;
                     Caption = 'Product Width';
                 }
-                field(AJWOH_PrdL; "Shp. Product Length")
+                field(AJWOH_PrdL; "Product Length")
                 {
                     ApplicationArea = All;
                     Caption = 'Product Lenght';
                 }
-                field(AJWOH_PrdH; "Shp. Product Height")
+                field(AJWOH_PrdH; "Product Height")
                 {
                     ApplicationArea = All;
                     Caption = 'Product Height';
@@ -309,6 +307,6 @@ page 37072402 "AJ Shipping"
         }
     }
     var
-        AJShippingProcess: Codeunit "AJ Fill Shipping Process";
+        AJFillShippingProcess: Codeunit "AJ Fill Shipping Process";
+        AJShippingProcess: Codeunit "AJ Shipping Process";
 }
-

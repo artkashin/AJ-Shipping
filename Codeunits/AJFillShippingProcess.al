@@ -1,27 +1,5 @@
-codeunit 37072400 "AJ Fill Shipping Process"
+codeunit 37072401 "AJ Fill Shipping Process"
 {
-    procedure MoveToArchive(AJShipHeader: Record "AJ Shipping Header")
-    var
-        AJShipLine: Record "AJ Shipping Line";
-        AJShipHeaderArch: Record "AJ Shipping Header Arch.";
-        AJShipLineArch: Record "AJ Shipping Line Arch.";
-    begin
-        AJShipHeaderArch.Init();
-        AJShipHeaderArch.TransferFields(AJShipHeader);
-        AJShipHeaderArch."Created DateTime" := CurrentDateTime();
-        AJShipHeaderArch.Insert(true);
-
-        AJShipLine.SetRange("Shipping No.", AJShipHeader."Shipping No.");
-        if AJShipLine.FindSet() then
-            repeat
-                AJShipLineArch.Init();
-                AJShipLineArch.TransferFields(AJShipLine);
-                AJShipLineArch.Insert();
-            until AJShipLine.Next() = 0;
-
-        AJShipHeader.Delete(true);
-    end;
-
     procedure PopulateShippingHeaderFromLine(AJShippingLine: Record "AJ Shipping Line")
     begin
         case AJShippingLine."Source Table" of
@@ -67,9 +45,6 @@ codeunit 37072400 "AJ Fill Shipping Process"
     begin
         SalesHeader.Get(AJShippingLine."Source Document Type", AJShippingLine."Source ID");
         AJShippingHeader.get(AJShippingLine."Shipping No.");
-        ////AJShippingHeader."Custom Field 1" := 'ID: ' + SalesHeader."Sell-to Customer No." + ' DOC: ' + SalesHeader."No.";
-        ////AJShippingHeader."Custom Field 2" := SalesHeader."Your Reference";
-        ////AJShippingHeader."Custom Field 3" := SalesHeader."External Document No.";
         AJShippingHeader."Ship Date" := SalesHeader."Order Date";
 
         if Location.Get(SalesHeader."Location Code") then begin
