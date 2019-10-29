@@ -22,33 +22,43 @@ codeunit 37072400 "AJ Shipping Process"
         AJShipHeader.Delete(true);
     end;
 
-    procedure CreateShipping(SalesHeader: Record "Sales Header")
+    procedure CreateShipping(AJShippingLine: Record "AJ Shipping Line"; RecordID: RecordId)
     begin
         AJShipSetup.Get();
         if AJShipSetup."B2C Shipping" then
-            CreateBCShipping(SalesHeader);
+            CreateBCShipping(AJShippingLine, RecordID);
     end;
 
-    local procedure CreateBCShipping(SalesHeader: Record "Sales Header")
+    local procedure CreateBCShipping(AJShipLine: Record "AJ Shipping Line"; RecordID: RecordId)
     var
         AJShipHeader: Record "AJ Shipping Header";
-        AJShipLine: Record "AJ Shipping Line";
+        //AJShipLine: Record "AJ Shipping Line";
         AJFilShippingProcess: Codeunit "AJ Fill Shipping Process";
     begin
-
         AJShipHeader.Init();
         AJShipHeader."Ship Date" := Today();
         AJShipHeader."Created DateTime" := CurrentDateTime();
         AJShipHeader.Insert(true);
 
         // Add shipping line
-        AJFilShippingProcess.CreateLineFromSalesHeader(SalesHeader, AJShipHeader, AJShipLine);
-
+        case AJShipLine."Source Table" of
+            AJShipLine."Source Table"::"36":
+                AJFilShippingProcess.CreateLineFromSalesHeader(RecordID, AJShipHeader, AJShipLine);
+            AJShipLine."Source Table"::"38":
+                AJFilShippingProcess.CreateLineFromPurchaseHeader(RecordID, AJShipHeader, AJShipLine);
+            AJShipLine."Source Table"::"112":
+                AJFilShippingProcess.CreateLineFromSalesInvHeader(RecordID, AJShipHeader, AJShipLine);
+            AJShipLine."Source Table"::"110":
+                AJFilShippingProcess.CreateLineFromSalesShipHeader(RecordID, AJShipHeader, AJShipLine);
+            AJShipLine."Source Table"::"5740":
+                AJFilShippingProcess.CreateLineFromTransferHeader(RecordID, AJShipHeader, AJShipLine);
+            AJShipLine."Source Table"::"5744":
+                AJFilShippingProcess.CreateLineFromTransferShpHeader(RecordID, AJShipHeader, AJShipLine);
+        end;
         // Populate hedaer fields from line
         AJFilShippingProcess.PopulateShippingHeaderFromLine(AJShipLine);
 
-        if Confirm('Shipping is created \\Do you want to open Shipping document?', true) then
-            Page.Run(0, AJShipHeader);
+        Page.Run(0, AJShipHeader);
     end;
 
     var

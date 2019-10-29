@@ -23,7 +23,7 @@ pageextension 37072402 PageExtansion45 extends "Sales List"
             if FromSalesHeader.FindSet() then
                 repeat
                     Clear(AJFillShippingLine);
-                    AJFillShippingLine.CreateLineFromSalesHeader(FromSalesHeader, AJShippingHeader, AJShippingLine);
+                    AJFillShippingLine.CreateLineFromSalesHeader(FromSalesHeader.RecordId(), AJShippingHeader, AJShippingLine);
                 until FromSalesHeader.Next() = 0;
         end;
     end;

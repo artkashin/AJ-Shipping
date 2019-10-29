@@ -17,8 +17,8 @@
   "target": "Extension",
   "idRanges": [
     {
-      "from": 1,
-      "to": 99999999
+      "from": 37072300,
+      "to": 37073299
     }
   ],
   "contextSensitiveHelpUrl": "https://ALProject1.com/help/",

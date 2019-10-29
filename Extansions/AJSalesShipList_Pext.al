@@ -23,7 +23,7 @@ pageextension 37072403 PageExtansion130 extends "Posted Sales Shipment"
             if FromSalesShipHeader.FindSet() then
                 repeat
                     Clear(AJFillShippingLine);
-                    AJFillShippingLine.CreateLineFromSalesShipHeader(FromSalesShipHeader, AJShippingHeader, AJShippingLine);
+                    AJFillShippingLine.CreateLineFromSalesShipHeader(FromSalesShipHeader.RecordId(), AJShippingHeader, AJShippingLine);
                 until FromSalesShipHeader.Next() = 0;
         end;
     end;

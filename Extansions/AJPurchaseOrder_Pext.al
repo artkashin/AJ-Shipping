@@ -1,8 +1,8 @@
-pageextension 37072404 PageExtansion42 extends "Sales Order"
+pageextension 37072406 PageExtansion50 extends "Purchase Order"
 {
     actions
     {
-        addafter("&Order Confirmation")
+        addafter(Warehouse)
         {
             group("AJ Shipping")
             {
@@ -20,7 +20,7 @@ pageextension 37072404 PageExtansion42 extends "Sales Order"
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                     begin
                         AJShippingLine.Reset();
-                        AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"36");
+                        AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"38");
                         AJShippingLine.SetRange("Source ID", "No.");
                         if AJShippingLine.FindFirst() then begin
                             AJShippingHeader.get(AJShippingLine."Shipping No.");
@@ -29,13 +29,12 @@ pageextension 37072404 PageExtansion42 extends "Sales Order"
                         end
                         else
                             if Confirm('Create Shipping?', true) then begin
-                                AJShippingLine."Source Table" := AJShippingLine."Source Table"::"36";
-                                AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Order;
+                                AJShippingLine."Source Table" := AJShippingLine."Source Table"::"38";
+                                AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::"Order";
 
                                 AJShippingProcess.CreateShipping(AJShippingLine, RecordId())
                             end else
                                 Message('Action was canceled');
-
                     end;
                 }
             }

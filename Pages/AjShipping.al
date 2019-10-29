@@ -22,7 +22,6 @@ page 37072402 "AJ Shipping"
                     var
                         dtm: DateTime;
                     begin
-                        //vadimb 08162018 >
                         Evaluate(dtm, Format("Latest Ship Date", 9));
                         if "Ship Date" > DT2Date(dtm) then
                             Message('Latest Ship date is ' + Format(DT2Date(dtm)));
@@ -31,13 +30,16 @@ page 37072402 "AJ Shipping"
                 field("International Shipment"; "International Shipment")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
             }
             group("Ship-from")
             {
                 field("Ship-from Location Code"; "Ship-from Location Code")
                 {
+                    //QuickEntry = false; //sdf?
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from Name"; "Ship-from Name")
                 {
@@ -46,6 +48,7 @@ page 37072402 "AJ Shipping"
                 field("Ship-from Company"; "Ship-from Company")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from Address 1"; "Ship-from Address 1")
                 {
@@ -54,38 +57,47 @@ page 37072402 "AJ Shipping"
                 field("Ship-from Address 2"; "Ship-from Address 2")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from Address 3"; "Ship-from Address 3")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from City"; "Ship-from City")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from Zip"; "Ship-from Zip")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from State"; "Ship-from State")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from Country"; "Ship-from Country Code")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from Phone"; "Ship-from Phone")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from E-mail"; "Ship-from E-mail")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field("Ship-from Verified"; "Ship-from Verified")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
             }
             group("Ship-To")
@@ -101,6 +113,7 @@ page 37072402 "AJ Shipping"
                 field("Ship-To Company"; "Ship-To Company")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -117,6 +130,7 @@ page 37072402 "AJ Shipping"
                 field("Ship-To Customer Address 2"; "Ship-To Customer Address 2")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -125,6 +139,7 @@ page 37072402 "AJ Shipping"
                 field("Ship-To Customer Address 3"; "Ship-To Customer Address 3")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -157,6 +172,7 @@ page 37072402 "AJ Shipping"
                 field("Ship-To Customer Country"; "Ship-To Customer Country")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -165,6 +181,7 @@ page 37072402 "AJ Shipping"
                 field("Ship-To Customer Phone"; "Ship-To Customer Phone")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -173,6 +190,7 @@ page 37072402 "AJ Shipping"
                 field("Ship-To E-mail"; "Ship-To E-mail")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -181,13 +199,8 @@ page 37072402 "AJ Shipping"
                 field("Ship-To Address Verified"; "Ship-To Address Verified")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
-            }
-
-            part(Control1000000043; "AJ Shipping Subform")
-            {
-                ApplicationArea = All;
-                SubPageLink = "Shipping No." = field("Shipping No.");
             }
             group("Weight characteristics")
             {
@@ -211,6 +224,12 @@ page 37072402 "AJ Shipping"
                     ApplicationArea = All;
                     Caption = 'Product Height';
                 }
+            }
+            part(Control1000000043; "AJ Shipping Subform")
+            {
+                ApplicationArea = All;
+                Caption = 'Lines';
+                SubPageLink = "Shipping No." = field("Shipping No.");
             }
         }
     }
@@ -239,7 +258,7 @@ page 37072402 "AJ Shipping"
                 {
                     ApplicationArea = All;
                     Promoted = false;
-                    Caption = 'Get Lines From Sales Hader';
+                    Caption = 'Get Lines From Sales';
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
@@ -256,7 +275,7 @@ page 37072402 "AJ Shipping"
                 {
                     ApplicationArea = All;
                     Promoted = false;
-                    Caption = 'Get Lines From Purchase Hader';
+                    Caption = 'Get Lines From Purchase Header';
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
@@ -273,7 +292,7 @@ page 37072402 "AJ Shipping"
                 {
                     ApplicationArea = All;
                     Promoted = false;
-                    Caption = 'Get Lines From Sales Shipment Hader';
+                    Caption = 'Get Lines From Sales Shipment';
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
@@ -290,16 +309,16 @@ page 37072402 "AJ Shipping"
                 {
                     ApplicationArea = All;
                     Promoted = false;
-                    Caption = 'Get Lines From Purchase Hader';
+                    Caption = 'Get Lines From Posted Sales Invoices';
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
-                        SalesInvoice: Page "Posted Sales Invoice";
+                        SalesInvoices: Page "Posted Sales Invoices";
                     begin
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
-                        SalesInvoice.SetLookupForAJShipping(AJShippingLine);
-                        SalesInvoice.LookupMode(true);
-                        SalesInvoice.RunModal();
+                        SalesInvoices.SetLookupForAJShipping(AJShippingLine);
+                        SalesInvoices.LookupMode(true);
+                        SalesInvoices.RunModal();
                         Message('Done');
                     end;
                 }
@@ -307,6 +326,5 @@ page 37072402 "AJ Shipping"
         }
     }
     var
-        AJFillShippingProcess: Codeunit "AJ Fill Shipping Process";
         AJShippingProcess: Codeunit "AJ Shipping Process";
 }

@@ -23,7 +23,7 @@ pageextension 37072400 PageExtansion54 extends "Purchase List"
             if FromPurchaseHeader.FindSet() then
                 repeat
                     Clear(AJFillShippingLine);
-                    AJFillShippingLine.CreateLineFromPurchaseHeader(FromPurchaseHeader, AJShippingHeader, AJShippingLine);
+                    AJFillShippingLine.CreateLineFromPurchaseHeader(FromPurchaseHeader.RecordId(), AJShippingHeader, AJShippingLine);
                 until FromPurchaseHeader.Next() = 0;
         end;
     end;

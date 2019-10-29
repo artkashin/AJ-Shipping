@@ -1,4 +1,4 @@
-pageextension 37072401 PageExtansion132 extends "Posted Sales Invoice"
+pageextension 37072401 PageExtansion143 extends "Posted Sales Invoices"
 {
     var
         AJShippingLine: Record "AJ Shipping Line";
@@ -23,7 +23,7 @@ pageextension 37072401 PageExtansion132 extends "Posted Sales Invoice"
             if FromSalesInvHeader.FindSet() then
                 repeat
                     Clear(AJFillShippingLine);
-                    AJFillShippingLine.CreateLineFromSalesInvHeader(FromSalesInvHeader, AJShippingHeader, AJShippingLine);
+                    AJFillShippingLine.CreateLineFromSalesInvHeader(FromSalesInvHeader.RecordId(), AJShippingHeader, AJShippingLine);
                 until FromSalesInvHeader.Next() = 0;
         end;
     end;
