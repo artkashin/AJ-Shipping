@@ -22,19 +22,21 @@ pageextension 37072400 PageExtansion54 extends "Purchase List"
             AJShippingHeader.Get(AJShippingLine."Shipping No.");
             FromPurchaseHeader.Copy(Rec);
             CurrPage.SetSelectionFilter(FromPurchaseHeader);
-            if FromPurchaseHeader.FindSet() then begin
-                if (FromPurchaseHeader."Document Type" <> FromPurchaseHeader."Document Type"::"Return Order") and
-                (not AJShippingCheck.AllowPurchaseShipping()) then
-                    HaveBadDocuments := true
-                else
-                    repeat
+            HaveBadDocuments := false;
+            if FromPurchaseHeader.FindSet() then
+                repeat
+                    if (FromPurchaseHeader."Document Type" <> FromPurchaseHeader."Document Type"::"Return Order") and
+                    (not AJShippingCheck.AllowPurchaseShipping()) then
+                        HaveBadDocuments := true
+                    else begin
                         Clear(AJFillShippingLine);
                         AJFillShippingLine.CreateLineFromPurchaseHeader(FromPurchaseHeader.RecordId(), AJShippingHeader, AJShippingLine);
-                    until FromPurchaseHeader.Next() = 0;
-                if HaveBadDocuments then
-                    Message('Lines with a document type other than the "Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Setup');
-            end;
-            Message('Done');
+                    end;
+                until FromPurchaseHeader.Next() = 0;
+            if HaveBadDocuments then
+                Message('Lines with a document type other than the "Return Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Setup')
+            else
+                Message('Done');
         end;
     end;
 }

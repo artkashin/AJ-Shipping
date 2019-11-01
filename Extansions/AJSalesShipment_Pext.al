@@ -1,8 +1,8 @@
-pageextension 37072405 PageExtansion6640 extends "Purchase Return Order"
+pageextension 37072407 PageExtansion132 extends "Posted Sales Shipment"
 {
     actions
     {
-        addafter(Warehouse)
+        addafter("&Shipment")
         {
             group("AJ Shipping")
             {
@@ -20,7 +20,7 @@ pageextension 37072405 PageExtansion6640 extends "Purchase Return Order"
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                     begin
                         AJShippingLine.Reset();
-                        AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"38");
+                        AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"110");
                         AJShippingLine.SetRange("Source ID", "No.");
                         if AJShippingLine.FindFirst() then begin
                             AJShippingHeader.get(AJShippingLine."Shipping No.");
@@ -29,9 +29,8 @@ pageextension 37072405 PageExtansion6640 extends "Purchase Return Order"
                         end
                         else
                             if Confirm('Create Shipping?', true) then begin
-                                AJShippingLine."Source Table" := AJShippingLine."Source Table"::"38";
-                                AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::"Return Order";
-
+                                AJShippingLine."Source Table" := AJShippingLine."Source Table"::"110";
+                                //AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::;
                                 AJShippingProcess.CreateShipping(AJShippingLine, RecordId())
                             end else
                                 Message('Action was canceled');

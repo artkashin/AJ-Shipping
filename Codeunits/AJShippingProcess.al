@@ -57,7 +57,6 @@ codeunit 37072401 "AJ Shipping Process"
         end;
         // Populate hedaer fields from line
         AJFilShippingProcess.PopulateShippingHeaderFromLine(AJShipLine);
-
         Page.Run(0, AJShipHeader);
     end;
 

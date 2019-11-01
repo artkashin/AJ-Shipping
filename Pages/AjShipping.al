@@ -251,29 +251,16 @@ page 37072402 "AJ Shipping"
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
+                        SalesHeader: Record "Sales Header";
                         SalesList: Page "Sales List";
                     begin
-
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        SalesHeader.Reset();
+                        SalesHeader.SetFilter("Document Type", '<>%1|<>%2', SalesHeader."Document Type"::"Credit Memo", SalesHeader."Document Type"::Quote);
+                        SalesList.SetTableView(SalesHeader);
                         SalesList.SetLookupForAJShipping(AJShippingLine);
                         SalesList.LookupMode(true);
                         SalesList.RunModal();
-                    end;
-                }
-                action("Get Purchase Header")
-                {
-                    ApplicationArea = All;
-                    Promoted = false;
-                    Caption = 'Get Lines From Purchase Header';
-                    trigger OnAction()
-                    var
-                        AJShippingLine: Record "AJ Shipping Line";
-                        PurchList: Page "Purchase List";
-                    begin
-                        AJShippingLine."Shipping No." := Rec."Shipping No.";
-                        PurchList.SetLookupForAJShipping(AJShippingLine);
-                        PurchList.LookupMode(true);
-                        PurchList.RunModal();
                     end;
                 }
                 action("Get Sales Ship Header")
@@ -290,7 +277,38 @@ page 37072402 "AJ Shipping"
                         SalesShipmet.SetLookupForAJShipping(AJShippingLine);
                         SalesShipmet.LookupMode(true);
                         SalesShipmet.RunModal();
-                        Message('Done');
+                    end;
+                }
+                action("Get Purchase Header")
+                {
+                    ApplicationArea = All;
+                    Promoted = false;
+                    Caption = 'Get Lines From Purchases';
+                    trigger OnAction()
+                    var
+                        AJShippingLine: Record "AJ Shipping Line";
+                        PurchList: Page "Purchase List";
+                    begin
+                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        PurchList.SetLookupForAJShipping(AJShippingLine);
+                        PurchList.LookupMode(true);
+                        PurchList.RunModal();
+                    end;
+                }
+                action("Get Transfer Orders")
+                {
+                    ApplicationArea = All;
+                    Promoted = false;
+                    Caption = 'Get Lines From Transfer Orders';
+                    trigger OnAction()
+                    var
+                        AJShippingLine: Record "AJ Shipping Line";
+                        TransferOrders: Page "Transfer Orders";
+                    begin
+                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        TransferOrders.SetLookupForAJShipping(AJShippingLine);
+                        TransferOrders.LookupMode(true);
+                        TransferOrders.RunModal();
                     end;
                 }
                 action("Get Sales Inv Header")
@@ -308,9 +326,25 @@ page 37072402 "AJ Shipping"
                         SalesInvoices.SetLookupForAJShipping(AJShippingLine);
                         SalesInvoices.LookupMode(true);
                         SalesInvoices.RunModal();
-                        Message('Done');
                     end;
                 }
+                action("Get Transfer Shipments")
+                {
+                    ApplicationArea = All;
+                    Promoted = false;
+                    Caption = 'Get Lines From Transfer Shipments';
+                    trigger OnAction()
+                    var
+                        AJShippingLine: Record "AJ Shipping Line";
+                        TransferShipments: Page "Posted Transfer Shipments";
+                    begin
+                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        TransferShipments.SetLookupForAJShipping(AJShippingLine);
+                        TransferShipments.LookupMode(true);
+                        TransferShipments.RunModal();
+                    end;
+                }
+
             }
         }
     }

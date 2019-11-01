@@ -52,7 +52,7 @@ table 37072401 "AJ Shipping Header"
             var
                 Location: Record Location;
             begin
-                Location.Get("Ship-from Location Code");
+                if Location.Get("Ship-from Location Code") then;
                 "Ship-from Name" := Location.Name;
                 "Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-from Company"));
                 "Ship-from Address 1" := Location.Address;

@@ -22,19 +22,22 @@ pageextension 37072402 PageExtansion45 extends "Sales List"
             AJShippingHeader.Get(AJShippingLine."Shipping No.");
             FromSalesHeader.Copy(Rec);
             CurrPage.SetSelectionFilter(FromSalesHeader);
-            if FromSalesHeader.FindSet() then begin
-                if (FromSalesHeader."Document Type" = FromSalesHeader."Document Type"::"Return Order") and
-                (not AJShippingCheck.AllowSalesReturnShipping()) then
-                    HaveBadDocuments := true
-                else
-                    repeat
+            HaveBadDocuments := false;
+            if FromSalesHeader.FindSet() then
+                repeat
+                    if (FromSalesHeader."Document Type" = FromSalesHeader."Document Type"::"Return Order") and
+                    (not AJShippingCheck.AllowSalesReturnShipping()) then
+                        HaveBadDocuments := true
+                    else begin
                         Clear(AJFillShippingLine);
                         AJFillShippingLine.CreateLineFromSalesHeader(FromSalesHeader.RecordId(), AJShippingHeader, AJShippingLine);
-                    until FromSalesHeader.Next() = 0;
+                    end;
+                until FromSalesHeader.Next() = 0;
 
-                if HaveBadDocuments then
-                    Message('Lines with a document type "Return Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Setup');
-            end;
+            if HaveBadDocuments then
+                Message('Lines with a document type "Return Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Setup')
+            else
+                Message('Done');
         end;
     end;
 }

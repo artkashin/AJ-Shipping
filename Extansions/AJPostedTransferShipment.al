@@ -1,8 +1,8 @@
-pageextension 37072407 PageExtansion132 extends "Posted Sales Invoice"
+pageextension 37072412 PageExtansion5743 extends "Posted Transfer Shipment"
 {
     actions
     {
-        addafter(IncomingDocument)
+        addafter("&Shipment")
         {
             group("AJ Shipping")
             {
@@ -20,7 +20,7 @@ pageextension 37072407 PageExtansion132 extends "Posted Sales Invoice"
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                     begin
                         AJShippingLine.Reset();
-                        AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"112");
+                        AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"5740");
                         AJShippingLine.SetRange("Source ID", "No.");
                         if AJShippingLine.FindFirst() then begin
                             AJShippingHeader.get(AJShippingLine."Shipping No.");
@@ -29,8 +29,8 @@ pageextension 37072407 PageExtansion132 extends "Posted Sales Invoice"
                         end
                         else
                             if Confirm('Create Shipping?', true) then begin
-                                AJShippingLine."Source Table" := AJShippingLine."Source Table"::"112";
-                                AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
+                                AJShippingLine."Source Table" := AJShippingLine."Source Table"::"5740";
+                                AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Order;
 
                                 AJShippingProcess.CreateShipping(AJShippingLine, RecordId())
                             end else
