@@ -18,7 +18,11 @@ pageextension 37072406 PageExtansion50 extends "Purchase Order"
                         AJShippingLine: Record "AJ Shipping Line";
                         AJShippingHeader: Record "AJ Shipping Header";
                         AJShippingProcess: Codeunit "AJ Shipping Process";
+                        AJShippingCheck: Codeunit "AJ Shipping Check";
                     begin
+                        if not AJShippingCheck.AllowPurchaseShipping() then
+                            Error('You cannot create Shipping, because the corresponding setting is not enabled in AJ Shipping Setup');
+
                         AJShippingLine.Reset();
                         AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"38");
                         AJShippingLine.SetRange("Source ID", "No.");

@@ -19,6 +19,14 @@ page 37072400 "AJ Shipping Setup"
                 {
                     ApplicationArea = All;
                 }
+                field("Allow Crt. Not Purchase Return"; "Allow Crt. Not Purchase Return")
+                {
+                    ApplicationArea = All;
+                }
+                field("Allow Crt. Return Sales Orders"; "Allow Crt. Return Sales Orders")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

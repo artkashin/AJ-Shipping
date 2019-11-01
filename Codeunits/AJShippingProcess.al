@@ -1,4 +1,4 @@
-codeunit 37072400 "AJ Shipping Process"
+codeunit 37072401 "AJ Shipping Process"
 {
     procedure MoveToArchive(AJShipHeader: Record "AJ Shipping Header")
     var
@@ -24,20 +24,20 @@ codeunit 37072400 "AJ Shipping Process"
 
     procedure CreateShipping(AJShippingLine: Record "AJ Shipping Line"; RecordID: RecordId)
     begin
-        AJShipSetup.Get();
-        if AJShipSetup."B2C Shipping" then
-            CreateBCShipping(AJShippingLine, RecordID);
+        CreateBCShipping(AJShippingLine, RecordID);
     end;
 
     local procedure CreateBCShipping(AJShipLine: Record "AJ Shipping Line"; RecordID: RecordId)
     var
         AJShipHeader: Record "AJ Shipping Header";
-        //AJShipLine: Record "AJ Shipping Line";
         AJFilShippingProcess: Codeunit "AJ Fill Shipping Process";
     begin
+        AJShipSetup.Get();
+
         AJShipHeader.Init();
         AJShipHeader."Ship Date" := Today();
         AJShipHeader."Created DateTime" := CurrentDateTime();
+        AJShipHeader."B2C Shipping" := AJShipSetup."B2C Shipping";
         AJShipHeader.Insert(true);
 
         // Add shipping line

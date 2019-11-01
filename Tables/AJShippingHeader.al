@@ -17,7 +17,10 @@ table 37072401 "AJ Shipping Header"
         field(21; "Ship Date"; Date)
         {
         }
-        field(30; "Shipped DateTime"; DateTime)
+        field(22; "Shipped DateTime"; DateTime)
+        {
+        }
+        field(30; "B2C Shipping"; Boolean)
         {
         }
         field(40; "Product Weight"; Decimal)
@@ -171,9 +174,6 @@ table 37072401 "AJ Shipping Header"
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
-        }
-        field(190; "International Shipment"; Boolean)
-        {
         }
     }
 

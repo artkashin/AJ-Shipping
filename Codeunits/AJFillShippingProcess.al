@@ -1,4 +1,4 @@
-codeunit 37072401 "AJ Fill Shipping Process"
+codeunit 37072402 "AJ Fill Shipping Process"
 {
     procedure PopulateShippingHeaderFromLine(AJShippingLine: Record "AJ Shipping Line")
     begin
@@ -16,6 +16,7 @@ codeunit 37072401 "AJ Fill Shipping Process"
             AJShippingLine."Source Table"::"5744":
                 PopulateFromTransferShipment(AJShippingLine);
         end;
+
     end;
 
     procedure PopulateFromLocation(AJShippingHeader: Record "AJ Shipping Header")
@@ -161,7 +162,6 @@ codeunit 37072401 "AJ Fill Shipping Process"
         AJShippingHeader.get(AJShippingLine."Shipping No.");
         //AJShippingHeader."Custom Field 1" := 'ID: ' + SalesShipmentHeader."Sell-to Customer No." + ' DOC: ' + SalesShipmentHeader."No.";
         //AJShippingHeader."Custom Field 2" := SalesShipmentHeader."Your Reference";
-
         //AJShippingHeader."Custom Field 3" := SalesShipmentHeader."External Document No.";
 
         AJShippingHeader."Ship Date" := SalesShipmentHeader."Order Date";

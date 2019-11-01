@@ -18,26 +18,12 @@ page 37072402 "AJ Shipping"
                 field("Ship Date"; "Ship Date")
                 {
                     ApplicationArea = All;
-                    trigger OnValidate()
-                    var
-                        dtm: DateTime;
-                    begin
-                        Evaluate(dtm, Format("Latest Ship Date", 9));
-                        if "Ship Date" > DT2Date(dtm) then
-                            Message('Latest Ship date is ' + Format(DT2Date(dtm)));
-                    end;
-                }
-                field("International Shipment"; "International Shipment")
-                {
-                    ApplicationArea = All;
-                    Importance = Additional;
                 }
             }
             group("Ship-from")
             {
                 field("Ship-from Location Code"; "Ship-from Location Code")
                 {
-                    //QuickEntry = false; //sdf?
                     ApplicationArea = All;
                     Importance = Additional;
                 }
@@ -243,7 +229,9 @@ page 37072402 "AJ Shipping"
                 action("Move to Archive")
                 {
                     ApplicationArea = All;
-                    Promoted = false;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    Image = Archive;
                     Caption = 'Move to Archive';
                     trigger OnAction()
                     begin
@@ -254,6 +242,7 @@ page 37072402 "AJ Shipping"
             }
             group("Filling")
             {
+                Enabled = AllowToadLine;
                 action("Get Sales Header")
                 {
                     ApplicationArea = All;
@@ -264,11 +253,11 @@ page 37072402 "AJ Shipping"
                         AJShippingLine: Record "AJ Shipping Line";
                         SalesList: Page "Sales List";
                     begin
+
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         SalesList.SetLookupForAJShipping(AJShippingLine);
                         SalesList.LookupMode(true);
                         SalesList.RunModal();
-                        Message('Done');
                     end;
                 }
                 action("Get Purchase Header")
@@ -285,18 +274,17 @@ page 37072402 "AJ Shipping"
                         PurchList.SetLookupForAJShipping(AJShippingLine);
                         PurchList.LookupMode(true);
                         PurchList.RunModal();
-                        Message('Done');
                     end;
                 }
                 action("Get Sales Ship Header")
                 {
                     ApplicationArea = All;
                     Promoted = false;
-                    Caption = 'Get Lines From Sales Shipment';
+                    Caption = 'Get Lines From Sales Shipments';
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
-                        SalesShipmet: Page "Posted Sales Shipment";
+                        SalesShipmet: Page "Posted Sales Shipments";
                     begin
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         SalesShipmet.SetLookupForAJShipping(AJShippingLine);
@@ -309,6 +297,7 @@ page 37072402 "AJ Shipping"
                 {
                     ApplicationArea = All;
                     Promoted = false;
+                    Visible = false;
                     Caption = 'Get Lines From Posted Sales Invoices';
                     trigger OnAction()
                     var
@@ -325,6 +314,12 @@ page 37072402 "AJ Shipping"
             }
         }
     }
+    trigger OnOpenPage()
+    begin
+        AllowToadLine := not "B2C Shipping";
+    end;
+
     var
         AJShippingProcess: Codeunit "AJ Shipping Process";
+        AllowToadLine: Boolean;
 }

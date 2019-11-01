@@ -107,6 +107,7 @@ page 37072401 "AJ Shipping List"
             }
             group("Weight characteristics")
             {
+                Visible = false;
                 field(AJWOH_PrdWgt; "Product Weight")
                 {
                     ApplicationArea = All;
