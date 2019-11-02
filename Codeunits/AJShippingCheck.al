@@ -41,6 +41,14 @@ codeunit 37072403 "AJ Shipping Check"
             Error('Creating a Shipping is forbidden, you have no Lines');
     end;
 
+    procedure AddLineInShippingAllowed()
+    var
+    begin
+        AJSHippingSetup.Get();
+        if not AJSHippingSetup."Allow Add Lines With B2C" then
+            Error('You cannot add lines to this document, because the setting "Allow Add Lines With B2C" in AJ Shipping Setup is not enabled');
+    end;
+
     procedure CheckMultiLocationsForSales(SalesHeader: Record "Sales Header")
     var
         SalesLine: Record "Sales Line";

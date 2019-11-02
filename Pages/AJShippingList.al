@@ -16,17 +16,10 @@ page 37072401 "AJ Shipping List"
         {
             repeater(Group)
             {
-                field("Document Type"; "Document Type")
-                {
-                    ApplicationArea = All;
-                    Editable = false;
-                    Visible = false;
-                }
                 field("Total Quantity"; "Total Quantity")
                 {
                     ApplicationArea = All;
                 }
-
                 field("Shipping No."; "Shipping No.")
                 {
                     ApplicationArea = All;
@@ -35,20 +28,7 @@ page 37072401 "AJ Shipping List"
                 {
                     ApplicationArea = All;
                 }
-
-                field("Latest Ship Date"; "Latest Ship Date")
-                {
-                    ApplicationArea = All;
-                }
                 field("Ship Date"; "Ship Date")
-                {
-                    ApplicationArea = All;
-                }
-                field("Hold Until Date"; "Hold Until Date")
-                {
-                    ApplicationArea = All;
-                }
-                field("Order DateTime"; "Order DateTime")
                 {
                     ApplicationArea = All;
                 }
@@ -96,14 +76,6 @@ page 37072401 "AJ Shipping List"
                 {
                     ApplicationArea = All;
                 }
-                field("First SKU"; gc_FirstSKU)
-                {
-                    ApplicationArea = All;
-                }
-                field("Cancel Reason"; "Cancel Reason")
-                {
-                    ApplicationArea = All;
-                }
             }
             group("Weight characteristics")
             {
@@ -139,12 +111,9 @@ page 37072401 "AJ Shipping List"
             group("Web Services")
             {
                 Caption = 'Web Services';
-
             }
         }
     }
-    var
-        gc_FirstSKU: Code[30];
 
 }
 

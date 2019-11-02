@@ -19,6 +19,9 @@ table 37072400 "AJ Shipping Setup"
         field(20; "Allow Crt. Not Purchase Return"; Boolean)
         {
         }
+        field(25; "Allow Add Lines With B2C"; Boolean)
+        {
+        }
     }
 
     keys

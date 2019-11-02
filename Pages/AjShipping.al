@@ -242,7 +242,6 @@ page 37072402 "AJ Shipping"
             }
             group("Filling")
             {
-                Enabled = AllowToadLine;
                 action("Get Sales Header")
                 {
                     ApplicationArea = All;
@@ -254,6 +253,7 @@ page 37072402 "AJ Shipping"
                         SalesHeader: Record "Sales Header";
                         SalesList: Page "Sales List";
                     begin
+                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         SalesHeader.Reset();
                         SalesHeader.SetFilter("Document Type", '<>%1|<>%2', SalesHeader."Document Type"::"Credit Memo", SalesHeader."Document Type"::Quote);
@@ -273,6 +273,7 @@ page 37072402 "AJ Shipping"
                         AJShippingLine: Record "AJ Shipping Line";
                         SalesShipmet: Page "Posted Sales Shipments";
                     begin
+                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         SalesShipmet.SetLookupForAJShipping(AJShippingLine);
                         SalesShipmet.LookupMode(true);
@@ -289,6 +290,7 @@ page 37072402 "AJ Shipping"
                         AJShippingLine: Record "AJ Shipping Line";
                         PurchList: Page "Purchase List";
                     begin
+                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         PurchList.SetLookupForAJShipping(AJShippingLine);
                         PurchList.LookupMode(true);
@@ -305,6 +307,7 @@ page 37072402 "AJ Shipping"
                         AJShippingLine: Record "AJ Shipping Line";
                         TransferOrders: Page "Transfer Orders";
                     begin
+                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         TransferOrders.SetLookupForAJShipping(AJShippingLine);
                         TransferOrders.LookupMode(true);
@@ -322,6 +325,7 @@ page 37072402 "AJ Shipping"
                         AJShippingLine: Record "AJ Shipping Line";
                         SalesInvoices: Page "Posted Sales Invoices";
                     begin
+                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         SalesInvoices.SetLookupForAJShipping(AJShippingLine);
                         SalesInvoices.LookupMode(true);
@@ -338,6 +342,7 @@ page 37072402 "AJ Shipping"
                         AJShippingLine: Record "AJ Shipping Line";
                         TransferShipments: Page "Posted Transfer Shipments";
                     begin
+                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
                         TransferShipments.SetLookupForAJShipping(AJShippingLine);
                         TransferShipments.LookupMode(true);
@@ -350,10 +355,11 @@ page 37072402 "AJ Shipping"
     }
     trigger OnOpenPage()
     begin
-        AllowToadLine := not "B2C Shipping";
+
     end;
 
     var
         AJShippingProcess: Codeunit "AJ Shipping Process";
-        AllowToadLine: Boolean;
+        AJShippingCheck: Codeunit "AJ Shipping Check";
+
 }

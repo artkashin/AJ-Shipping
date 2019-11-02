@@ -27,6 +27,10 @@ page 37072400 "AJ Shipping Setup"
                 {
                     ApplicationArea = All;
                 }
+                field("Allow Add Lines With B2C"; "Allow Add Lines With B2C")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }
