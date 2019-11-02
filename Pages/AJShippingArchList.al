@@ -1,12 +1,12 @@
-page 37072401 "AJ Shipping List"
+page 37072405 "AJ Shipping Arch. List"
 {
-    CardPageID = "AJ Shipping Card";
+    CardPageID = "AJ Shipping Arch. Card";
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
     UsageCategory = Lists;
     ApplicationArea = All;
-    SourceTable = "AJ Shipping Header";
+    SourceTable = "AJ Shipping Header Arch.";
     SourceTableView = ORDER(Descending)
                       WHERE("Document Type" = CONST(Order));
 

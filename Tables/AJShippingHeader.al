@@ -1,7 +1,7 @@
 table 37072401 "AJ Shipping Header"
 {
-    DrillDownPageId = "AJ Shipping";
-    LookupPageId = "AJ Shipping";
+    DrillDownPageId = "AJ Shipping Card";
+    LookupPageId = "AJ Shipping Card";
     fields
     {
         field(1; "Shipping No."; Code[20])

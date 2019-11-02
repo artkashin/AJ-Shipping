@@ -1,10 +1,9 @@
-page 37072402 "AJ Shipping"
+page 37072402 "AJ Shipping Card"
 {
     PageType = Document;
     PopulateAllFields = true;
     RefreshOnActivate = true;
     SourceTable = "AJ Shipping Header";
-
     layout
     {
         area(content)
@@ -235,8 +234,10 @@ page 37072402 "AJ Shipping"
                     Caption = 'Move to Archive';
                     trigger OnAction()
                     begin
-                        AJShippingProcess.MoveToArchive(Rec);
-                        Message('The document was moved to the archive');
+                        if Confirm('Move this document to the archive?') then begin
+                            AJShippingProcess.MoveToArchive(Rec);
+                            Message('Done');
+                        end;
                     end;
                 }
             }

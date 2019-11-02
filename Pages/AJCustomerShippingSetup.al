@@ -1,4 +1,4 @@
-page 37072405 "AJ Customer Shipping Setup"
+page 37072404 "AJ Customer Shipping Setup"
 {
     PageType = List;
     ApplicationArea = All;
@@ -10,11 +10,11 @@ page 37072405 "AJ Customer Shipping Setup"
         {
             repeater(group)
             {
-                field("Shipping No. Series"; Type)
+                field(Type; Type)
                 {
                     ApplicationArea = All;
                 }
-                field("B2C Shipping"; "Customer No.")
+                field("Customer No."; "Customer No.")
                 {
                     ApplicationArea = All;
                 }

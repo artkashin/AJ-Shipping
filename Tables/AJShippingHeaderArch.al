@@ -1,5 +1,7 @@
 table 37072410 "AJ Shipping Header Arch."
 {
+    DrillDownPageId = "AJ Shipping Arch. Card";
+    LookupPageId = "AJ Shipping Arch. Card";
     fields
     {
         field(1; "Shipping No."; Code[20])
@@ -15,31 +17,34 @@ table 37072410 "AJ Shipping Header Arch."
         field(21; "Ship Date"; Date)
         {
         }
-        field(30; "Shipped DateTime"; DateTime)
+        field(22; "Shipped DateTime"; DateTime)
         {
         }
-        field(39; "Shp. Product Weight Unit"; Text[30])
+        field(30; "B2C Shipping"; Boolean)
         {
         }
-        field(40; "Shp. Product Weight"; Decimal)
+        field(39; "Product Weight Unit"; Text[30])
         {
         }
-        field(41; "Shp. Product Width"; Decimal)
+        field(40; "Product Weight"; Decimal)
         {
         }
-        field(42; "Shp. Product Length"; Decimal)
+        field(41; "Product Width"; Decimal)
         {
         }
-        field(43; "Shp. Product Height"; Decimal)
+        field(42; "Product Length"; Decimal)
         {
         }
-        field(44; "Shp. Incoterms"; Text[30])
+        field(43; "Product Height"; Decimal)
         {
         }
-        field(45; "Shp. Hts Code"; Text[30])
+        field(44; "Incoterms"; Text[30])
         {
         }
-        field(46; "Shp. Method"; Text[30])
+        field(45; "Hts Code"; Text[30])
+        {
+        }
+        field(46; "Method"; Text[30])
         {
         }
         field(60; "Ship-from Location Code"; Code[10])
@@ -168,7 +173,7 @@ table 37072410 "AJ Shipping Header Arch."
         }
         field(180; "Total Quantity"; Decimal)
         {
-            CalcFormula = Sum ("AJ Shipping Line".Quantity WHERE("Shipping No." = FIELD("Shipping No.")));
+            CalcFormula = Sum ("AJ Shipping Line Arch.".Quantity WHERE("Shipping No." = FIELD("Shipping No.")));
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
