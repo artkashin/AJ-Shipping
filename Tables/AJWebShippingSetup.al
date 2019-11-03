@@ -22,6 +22,12 @@ table 37072400 "AJ Shipping Setup"
         field(25; "Allow Add Lines With B2C"; Boolean)
         {
         }
+        field(30; "Move to Arch. After Print"; Boolean)
+        {
+        }
+        field(35; "Change Ship Date in Order"; Boolean)
+        {
+        }
     }
 
     keys

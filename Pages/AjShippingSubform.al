@@ -13,18 +13,22 @@ page 37072403 "AJ Shipping Subform"
                 field("Source Type"; "Source Type")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Source Document Type"; "Source Document Type")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Source Table"; "Source Table")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Source ID"; "Source ID")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field(Description; Description)
                 {

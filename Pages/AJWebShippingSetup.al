@@ -31,6 +31,14 @@ page 37072400 "AJ Shipping Setup"
                 {
                     ApplicationArea = All;
                 }
+                field("Move to Arch. After Print"; "Move to Arch. After Print")
+                {
+                    ApplicationArea = All;
+                }
+                field("Change Ship Date in Order"; "Change Ship Date in Order")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

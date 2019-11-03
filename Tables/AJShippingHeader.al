@@ -35,13 +35,13 @@ table 37072401 "AJ Shipping Header"
         field(43; "Product Height"; Decimal)
         {
         }
-        field(44; "Shp. Incoterms"; Text[30])
+        field(44; "Incoterms"; Text[30])
         {
         }
-        field(45; "Shp. Hts Code"; Text[30])
+        field(45; "Hts Code"; Text[30])
         {
         }
-        field(46; "Shp. Method"; Text[30])
+        field(46; "Method"; Text[30])
         {
         }
         field(60; "Ship-from Location Code"; Code[10])
@@ -157,9 +157,6 @@ table 37072401 "AJ Shipping Header"
         field(140; "Document Type"; Option)
         {
             OptionMembers = Order,Return;
-        }
-        field(150; "Shipment Id"; Text[50])
-        {
         }
         field(160; "Cancel Reason"; Option)
         {

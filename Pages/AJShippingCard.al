@@ -25,6 +25,7 @@ page 37072402 "AJ Shipping Card"
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                    ShowMandatory = true;
                 }
                 field("Ship-from Name"; "Ship-from Name")
                 {
@@ -34,10 +35,12 @@ page 37072402 "AJ Shipping Card"
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                    ShowMandatory = true;
                 }
                 field("Ship-from Address 1"; "Ship-from Address 1")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Ship-from Address 2"; "Ship-from Address 2")
                 {
@@ -53,16 +56,19 @@ page 37072402 "AJ Shipping Card"
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                    ShowMandatory = true;
                 }
                 field("Ship-from Zip"; "Ship-from Zip")
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                    ShowMandatory = true;
                 }
                 field("Ship-from State"; "Ship-from State")
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                    ShowMandatory = true;
                 }
                 field("Ship-from Country"; "Ship-from Country Code")
                 {
@@ -73,6 +79,7 @@ page 37072402 "AJ Shipping Card"
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                    ShowMandatory = true;
                 }
                 field("Ship-from E-mail"; "Ship-from E-mail")
                 {
@@ -90,6 +97,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Name"; "Ship-To Customer Name")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -107,6 +115,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Address 1"; "Ship-To Customer Address 1")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -133,6 +142,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer City"; "Ship-To Customer City")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -141,6 +151,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Zip"; "Ship-To Customer Zip")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -149,6 +160,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer State"; "Ship-To Customer State")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                     trigger OnValidate()
                     begin
                         Modify();
@@ -193,21 +205,25 @@ page 37072402 "AJ Shipping Card"
                 {
                     ApplicationArea = All;
                     Caption = 'Product Weight';
+                    ShowMandatory = true;
                 }
                 field(AJWOH_PrdW; "Product Width")
                 {
                     ApplicationArea = All;
                     Caption = 'Product Width';
+                    ShowMandatory = true;
                 }
                 field(AJWOH_PrdL; "Product Length")
                 {
                     ApplicationArea = All;
                     Caption = 'Product Lenght';
+                    ShowMandatory = true;
                 }
                 field(AJWOH_PrdH; "Product Height")
                 {
                     ApplicationArea = All;
                     Caption = 'Product Height';
+                    ShowMandatory = true;
                 }
             }
             part(Control1000000043; "AJ Shipping Subform")

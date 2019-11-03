@@ -41,6 +41,14 @@ codeunit 37072403 "AJ Shipping Check"
             Error('Creating a Shipping is forbidden, you have no Lines');
     end;
 
+    procedure ReadyForArchive(AJShipHeader: Record "AJ Shipping Header")
+    var
+    begin
+        //AJShipHeader.TestField("");
+        AJSHippingSetup.Get();
+
+    end;
+
     procedure AddLineInShippingAllowed()
     var
     begin

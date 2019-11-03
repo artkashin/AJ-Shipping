@@ -161,9 +161,6 @@ table 37072410 "AJ Shipping Header Arch."
         {
             OptionMembers = Order,Return;
         }
-        field(150; "Shipment Id"; Text[50])
-        {
-        }
         field(160; "Cancel Reason"; Option)
         {
             OptionMembers = " ",NoInventory,ShippingAddressUndeliverable,CustomerExchange,BuyerCanceled,GeneralAdjustment,CarrierCreditDecision,RiskAssessmentInformationNotValid,CarrierCoverageFailure,CustomerReturn,MerchandiseNotReceived;

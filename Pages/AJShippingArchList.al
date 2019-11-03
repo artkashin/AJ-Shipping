@@ -24,10 +24,6 @@ page 37072405 "AJ Shipping Arch. List"
                 {
                     ApplicationArea = All;
                 }
-                field("Shipment Id"; "Shipment Id")
-                {
-                    ApplicationArea = All;
-                }
                 field("Ship Date"; "Ship Date")
                 {
                     ApplicationArea = All;
