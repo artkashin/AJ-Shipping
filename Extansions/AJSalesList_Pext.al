@@ -20,6 +20,7 @@ pageextension 37072402 PageExtansion45 extends "Sales List"
     begin
         if LookupforAJShipping and (CloseAction = Action::LookupOK) then begin
             AJShippingHeader.Get(AJShippingLine."Shipping No.");
+
             FromSalesHeader.Copy(Rec);
             CurrPage.SetSelectionFilter(FromSalesHeader);
             HaveBadDocuments := false;
@@ -36,8 +37,6 @@ pageextension 37072402 PageExtansion45 extends "Sales List"
 
             if HaveBadDocuments then
                 Message('Lines with a document type "Return Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Setup')
-            else
-                Message('Done');
         end;
     end;
 }

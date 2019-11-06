@@ -35,8 +35,6 @@ pageextension 37072400 PageExtansion54 extends "Purchase List"
                 until FromPurchaseHeader.Next() = 0;
             if HaveBadDocuments then
                 Message('Lines with a document type other than the "Return Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Setup')
-            else
-                Message('Done');
         end;
     end;
 }

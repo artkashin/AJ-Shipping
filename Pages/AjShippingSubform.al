@@ -18,16 +18,19 @@ page 37072403 "AJ Shipping Subform"
                 field("Source Document Type"; "Source Document Type")
                 {
                     ApplicationArea = All;
+                    Editable = "Source Type" = "Source Type"::"BC Document";
                     ShowMandatory = true;
                 }
                 field("Source Table"; "Source Table")
                 {
                     ApplicationArea = All;
+                    Editable = "Source Type" = "Source Type"::"BC Document";
                     ShowMandatory = true;
                 }
                 field("Source ID"; "Source ID")
                 {
                     ApplicationArea = All;
+                    Editable = "Source Type" <> "Source Type"::Other;
                     ShowMandatory = true;
                 }
                 field(Description; Description)
@@ -56,10 +59,9 @@ page 37072403 "AJ Shipping Subform"
                     AJFillShippingLine: Codeunit "AJ Fill Shipping Process";
                 begin
                     if "Source Table" <> 0 then
-                        AJFillShippingLine.PopulateShippingHeaderFromLine(Rec)
+                        AJFillShippingLine.PopulateShippingHeaderFromLine(Rec, false)
                     else
                         Error('This is empty line');
-                    Message('Done');
                 end;
             }
         }

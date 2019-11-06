@@ -5,7 +5,10 @@ codeunit 37072401 "AJ Shipping Process"
         AJShipLine: Record "AJ Shipping Line";
         AJShipHeaderArch: Record "AJ Shipping Header Arch.";
         AJShipLineArch: Record "AJ Shipping Line Arch.";
+        AJShippingCheck: Codeunit "AJ Shipping Check";
     begin
+        AJShippingCheck.CheckBerforeArchive(AJShipHeader);
+
         AJShipHeaderArch.Init();
         AJShipHeaderArch.TransferFields(AJShipHeader);
         AJShipHeaderArch."Created DateTime" := CurrentDateTime();
@@ -55,8 +58,9 @@ codeunit 37072401 "AJ Shipping Process"
             AJShipLine."Source Table"::"5744":
                 AJFilShippingProcess.CreateLineFromTransferShpHeader(RecordID, AJShipHeader, AJShipLine);
         end;
-        // Populate hedaer fields from line
-        AJFilShippingProcess.PopulateShippingHeaderFromLine(AJShipLine);
+
+        // Populate hedaer fields from line      
+        AJFilShippingProcess.PopulateShippingHeaderFromLine(AJShipLine, true);
         Page.Run(0, AJShipHeader);
     end;
 

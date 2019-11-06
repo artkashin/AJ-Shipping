@@ -26,77 +26,103 @@ page 37072402 "AJ Shipping Card"
                     ApplicationArea = All;
                     Importance = Additional;
                     ShowMandatory = true;
+                    trigger OnValidate()
+                    begin
+                        SetControl();
+                    end;
                 }
                 field("Ship-from Name"; "Ship-from Name")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                 }
                 field("Ship-from Company"; "Ship-from Company")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                     ShowMandatory = true;
                 }
                 field("Ship-from Address 1"; "Ship-from Address 1")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     ShowMandatory = true;
                 }
                 field("Ship-from Address 2"; "Ship-from Address 2")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                 }
                 field("Ship-from Address 3"; "Ship-from Address 3")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                 }
                 field("Ship-from City"; "Ship-from City")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                     ShowMandatory = true;
                 }
                 field("Ship-from Zip"; "Ship-from Zip")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                     ShowMandatory = true;
                 }
                 field("Ship-from State"; "Ship-from State")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                     ShowMandatory = true;
                 }
                 field("Ship-from Country"; "Ship-from Country Code")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                 }
                 field("Ship-from Phone"; "Ship-from Phone")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                     ShowMandatory = true;
                 }
                 field("Ship-from E-mail"; "Ship-from E-mail")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                 }
                 field("Ship-from Verified"; "Ship-from Verified")
                 {
                     ApplicationArea = All;
+                    Editable = LocationCodeFilled;
                     Importance = Additional;
                 }
             }
             group("Ship-To")
             {
+                field("Ship-To Location Code"; "Ship-To Location Code")
+                {
+                    ApplicationArea = All;
+                    Importance = Additional;
+                    trigger OnValidate()
+                    begin
+                        SetControl();
+                    end;
+                }
                 field("Ship-To Customer Name"; "Ship-To Customer Name")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
@@ -106,6 +132,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Company"; "Ship-To Company")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     Importance = Additional;
                     trigger OnValidate()
                     begin
@@ -115,6 +142,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Address 1"; "Ship-To Customer Address 1")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
@@ -124,6 +152,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Address 2"; "Ship-To Customer Address 2")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     Importance = Additional;
                     trigger OnValidate()
                     begin
@@ -133,6 +162,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Address 3"; "Ship-To Customer Address 3")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     Importance = Additional;
                     trigger OnValidate()
                     begin
@@ -142,6 +172,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer City"; "Ship-To Customer City")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
@@ -151,6 +182,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Zip"; "Ship-To Customer Zip")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
@@ -160,6 +192,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer State"; "Ship-To Customer State")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
@@ -169,6 +202,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Country"; "Ship-To Customer Country")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     Importance = Additional;
                     trigger OnValidate()
                     begin
@@ -178,6 +212,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Customer Phone"; "Ship-To Customer Phone")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     Importance = Additional;
                     trigger OnValidate()
                     begin
@@ -187,6 +222,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To E-mail"; "Ship-To E-mail")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     Importance = Additional;
                     trigger OnValidate()
                     begin
@@ -196,6 +232,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Address Verified"; "Ship-To Address Verified")
                 {
                     ApplicationArea = All;
+                    Editable = LocationToCodeFilled;
                     Importance = Additional;
                 }
             }
@@ -250,14 +287,12 @@ page 37072402 "AJ Shipping Card"
                     Caption = 'Move to Archive';
                     trigger OnAction()
                     begin
-                        if Confirm('Move this document to the archive?') then begin
+                        if Confirm('Move this document to the archive?') then
                             AJShippingProcess.MoveToArchive(Rec);
-                            Message('Done');
-                        end;
                     end;
                 }
             }
-            group("Filling")
+            group("Get Lines")
             {
                 action("Get Sales Header")
                 {
@@ -270,10 +305,12 @@ page 37072402 "AJ Shipping Card"
                         SalesHeader: Record "Sales Header";
                         SalesList: Page "Sales List";
                     begin
-                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
                         SalesHeader.Reset();
                         SalesHeader.SetFilter("Document Type", '<>%1|<>%2', SalesHeader."Document Type"::"Credit Memo", SalesHeader."Document Type"::Quote);
+                        if "Ship-from Location Code" <> '' then
+                            SalesHeader.SetRange("Location Code", "Ship-from Location Code");
                         SalesList.SetTableView(SalesHeader);
                         SalesList.SetLookupForAJShipping(AJShippingLine);
                         SalesList.LookupMode(true);
@@ -288,10 +325,15 @@ page 37072402 "AJ Shipping Card"
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
+                        SalesShpHeader: Record "Sales Shipment Header";
                         SalesShipmet: Page "Posted Sales Shipments";
                     begin
-                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
+                        if "Ship-from Location Code" <> '' then begin
+                            SalesShpHeader.SetRange("Location Code", "Ship-from Location Code");
+                            SalesShipmet.SetTableView(SalesShpHeader);
+                        end;
                         SalesShipmet.SetLookupForAJShipping(AJShippingLine);
                         SalesShipmet.LookupMode(true);
                         SalesShipmet.RunModal();
@@ -305,10 +347,15 @@ page 37072402 "AJ Shipping Card"
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
+                        PurchaseHeader: Record "Purchase Header";
                         PurchList: Page "Purchase List";
                     begin
-                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
+                        if "Ship-from Location Code" <> '' then begin
+                            PurchaseHeader.SetRange("Location Code", "Ship-from Location Code");
+                            PurchList.SetTableView(PurchaseHeader);
+                        end;
                         PurchList.SetLookupForAJShipping(AJShippingLine);
                         PurchList.LookupMode(true);
                         PurchList.RunModal();
@@ -322,10 +369,15 @@ page 37072402 "AJ Shipping Card"
                     trigger OnAction()
                     var
                         AJShippingLine: Record "AJ Shipping Line";
+                        TransferHeader: Record "Transfer Header";
                         TransferOrders: Page "Transfer Orders";
                     begin
-                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
+                        if "Ship-from Location Code" <> '' then begin
+                            TransferHeader.SetRange("Transfer-from Code", "Ship-from Location Code");
+                            TransferOrders.SetTableView(TransferHeader);
+                        end;
                         TransferOrders.SetLookupForAJShipping(AJShippingLine);
                         TransferOrders.LookupMode(true);
                         TransferOrders.RunModal();
@@ -342,8 +394,9 @@ page 37072402 "AJ Shipping Card"
                         AJShippingLine: Record "AJ Shipping Line";
                         SalesInvoices: Page "Posted Sales Invoices";
                     begin
-                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
+                        AJShippingLine.Description := "Ship-from Location Code";
                         SalesInvoices.SetLookupForAJShipping(AJShippingLine);
                         SalesInvoices.LookupMode(true);
                         SalesInvoices.RunModal();
@@ -359,8 +412,10 @@ page 37072402 "AJ Shipping Card"
                         AJShippingLine: Record "AJ Shipping Line";
                         TransferShipments: Page "Posted Transfer Shipments";
                     begin
-                        AJShippingCheck.AddLineInShippingAllowed();
                         AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
+
+                        AJShippingLine.Description := "Ship-from Location Code";
                         TransferShipments.SetLookupForAJShipping(AJShippingLine);
                         TransferShipments.LookupMode(true);
                         TransferShipments.RunModal();
@@ -372,11 +427,29 @@ page 37072402 "AJ Shipping Card"
     }
     trigger OnOpenPage()
     begin
+        SetControl();
+    end;
+
+    local procedure SetControl()
+    var
+
+    begin
+        if "Ship-from Location Code" = '' then
+            LocationCodeFilled := true
+        else
+            LocationCodeFilled := false;
+
+        if "Ship-To Location Code" = '' then
+            LocationToCodeFilled := true
+        else
+            LocationToCodeFilled := false;
 
     end;
 
     var
         AJShippingProcess: Codeunit "AJ Shipping Process";
         AJShippingCheck: Codeunit "AJ Shipping Check";
+        LocationCodeFilled: boolean;
+        LocationToCodeFilled: Boolean;
 
 }

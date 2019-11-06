@@ -13,7 +13,6 @@ page 37072400 "AJ Shipping Setup"
                 field("Shipping No. Series"; "Shipping No. Series")
                 {
                     ApplicationArea = All;
-
                 }
                 field("B2C Shipping"; "B2C Shipping")
                 {

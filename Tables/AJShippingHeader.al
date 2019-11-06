@@ -103,6 +103,26 @@ table 37072401 "AJ Shipping Header"
         field(73; "Ship-from E-mail"; Text[35])
         {
         }
+        field(79; "Ship-To Location Code"; Code[10])
+        {
+            TableRelation = Location;
+
+            trigger OnValidate()
+            var
+                Location: Record Location;
+            begin
+                if Location.Get("Ship-to Location Code") then;
+                "Ship-to Customer Name" := Location.Name;
+                "Ship-to Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-to Company"));
+                "Ship-to Customer Address 1" := Location.Address;
+                "Ship-to Customer Address 2" := Location."Address 2";
+                "Ship-to Customer City" := Location.City;
+                "Ship-to Customer State" := CopyStr(Location.County, 1, MaxStrLen("Ship-to Customer State"));
+                "Ship-to Customer Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-to Customer Zip"));
+                "Ship-to Customer Country" := Location."Country/Region Code";
+                "Ship-to Customer Phone" := Location."Phone No.";
+            end;
+        }
         field(80; "Ship-To Customer Name"; Text[100])
         {
         }
@@ -192,6 +212,14 @@ table 37072401 "AJ Shipping Header"
             AJShippingSetup.TestField("Shipping No. Series");
             "Shipping No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
         end;
+
+        if "Ship Date" < Today() then begin
+            if "Ship Date" <> 0D then
+                Message('Shipment Date is less than today, it will be changed');
+
+            "Ship Date" := Today()
+        end;
+
     end;
 
     trigger OnDelete()

@@ -1,20 +1,20 @@
 codeunit 37072402 "AJ Fill Shipping Process"
 {
-    procedure PopulateShippingHeaderFromLine(AJShippingLine: Record "AJ Shipping Line")
+    procedure PopulateShippingHeaderFromLine(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     begin
         case AJShippingLine."Source Table" of
             AJShippingLine."Source Table"::"36":
-                PopulateFromSalesHeader(AJShippingLine);
+                PopulateFromSalesHeader(AJShippingLine, ChangeShipFrom);
             AJShippingLine."Source Table"::"110":
-                PopulateFromSalesShipment(AJShippingLine);
+                PopulateFromSalesShipment(AJShippingLine, ChangeShipFrom);
             AJShippingLine."Source Table"::"112":
-                PopulateFromSalesInvoice(AJShippingLine);
+                PopulateFromSalesInvoice(AJShippingLine, ChangeShipFrom);
             AJShippingLine."Source Table"::"38":
-                PopulateFromPurchaseHeader(AJShippingLine);
+                PopulateFromPurchaseHeader(AJShippingLine, ChangeShipFrom);
             AJShippingLine."Source Table"::"5740":
-                PopulateFromTransferHeader(AJShippingLine);
+                PopulateFromTransferHeader(AJShippingLine, ChangeShipFrom);
             AJShippingLine."Source Table"::"5744":
-                PopulateFromTransferShipment(AJShippingLine);
+                PopulateFromTransferShipment(AJShippingLine, ChangeShipFrom);
         end;
     end;
 
@@ -36,7 +36,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         end;
     end;
 
-    local procedure PopulateFromSalesHeader(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromSalesHeader(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     var
         SalesHeader: Record "Sales Header";
         AJShippingHeader: Record "AJ Shipping Header";
@@ -47,18 +47,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.get(AJShippingLine."Shipping No.");
         AJShippingHeader."Ship Date" := SalesHeader."Order Date";
 
-        if Location.Get(SalesHeader."Location Code") then begin
-            AJShippingHeader."Ship-from Location Code" := Location.Code;
-            AJShippingHeader."Ship-from Name" := Location.Name;
-            AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
-            AJShippingHeader."Ship-from Address 1" := Location.Address;
-            AJShippingHeader."Ship-from Address 2" := Location."Address 2";
-            AJShippingHeader."Ship-from City" := Location.City;
-            AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
-            AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-            AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
-            AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-        end;
+        if ChangeShipFrom then
+            if Location.Get(SalesHeader."Location Code") then begin
+                AJShippingHeader."Ship-from Location Code" := Location.Code;
+                AJShippingHeader."Ship-from Name" := Location.Name;
+                AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
+                AJShippingHeader."Ship-from Address 1" := Location.Address;
+                AJShippingHeader."Ship-from Address 2" := Location."Address 2";
+                AJShippingHeader."Ship-from City" := Location.City;
+                AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
+                AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
+                AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
+                AJShippingHeader."Ship-from Phone" := Location."Phone No.";
+            end;
 
         AJShippingHeader."Ship-from Residential" := false;
 
@@ -91,7 +92,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromSalesInvoice(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromSalesInvoice(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     var
         SalesInvHeader: Record "Sales Invoice Header";
         AJShippingHeader: Record "AJ Shipping Header";
@@ -105,18 +106,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
         //AJShippingHeader."Custom Field 3" := SalesInvHeader."External Document No.";
         AJShippingHeader."Ship Date" := SalesInvHeader."Order Date";
 
-        if Location.Get(SalesInvHeader."Location Code") then begin
-            AJShippingHeader."Ship-from Location Code" := Location.Code;
-            AJShippingHeader."Ship-from Name" := Location.Name;
-            AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
-            AJShippingHeader."Ship-from Address 1" := Location.Address;
-            AJShippingHeader."Ship-from Address 2" := Location."Address 2";
-            AJShippingHeader."Ship-from City" := Location.City;
-            AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
-            AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-            AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
-            AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-        end;
+        if ChangeShipFrom then
+            if Location.Get(SalesInvHeader."Location Code") then begin
+                AJShippingHeader."Ship-from Location Code" := Location.Code;
+                AJShippingHeader."Ship-from Name" := Location.Name;
+                AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
+                AJShippingHeader."Ship-from Address 1" := Location.Address;
+                AJShippingHeader."Ship-from Address 2" := Location."Address 2";
+                AJShippingHeader."Ship-from City" := Location.City;
+                AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
+                AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
+                AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
+                AJShippingHeader."Ship-from Phone" := Location."Phone No.";
+            end;
 
         AJShippingHeader."Ship-from Residential" := false;
 
@@ -149,7 +151,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromSalesShipment(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromSalesShipment(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     var
         SalesShipmentHeader: Record "Sales Shipment Header";
         AJShippingHeader: Record "AJ Shipping Header";
@@ -165,18 +167,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
         AJShippingHeader."Ship Date" := SalesShipmentHeader."Order Date";
 
-        if Location.Get(SalesShipmentHeader."Location Code") then begin
-            AJShippingHeader."Ship-from Location Code" := Location.Code;
-            AJShippingHeader."Ship-from Name" := Location.Name;
-            AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
-            AJShippingHeader."Ship-from Address 1" := Location.Address;
-            AJShippingHeader."Ship-from Address 2" := Location."Address 2";
-            AJShippingHeader."Ship-from City" := Location.City;
-            AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
-            AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-            AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
-            AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-        end;
+        if ChangeShipFrom then
+            if Location.Get(SalesShipmentHeader."Location Code") then begin
+                AJShippingHeader."Ship-from Location Code" := Location.Code;
+                AJShippingHeader."Ship-from Name" := Location.Name;
+                AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
+                AJShippingHeader."Ship-from Address 1" := Location.Address;
+                AJShippingHeader."Ship-from Address 2" := Location."Address 2";
+                AJShippingHeader."Ship-from City" := Location.City;
+                AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
+                AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
+                AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
+                AJShippingHeader."Ship-from Phone" := Location."Phone No.";
+            end;
 
         AJShippingHeader."Ship-from Residential" := false;
         AJShippingHeader."Ship-To Customer Name" := SalesShipmentHeader."Ship-to Name";
@@ -208,19 +211,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromPurchaseHeader(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromPurchaseHeader(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     begin
         case AJShippingLine."Source Document Type" of
             AJShippingLine."Source Document Type"::"Return Order":
-                PopulateFromPurchaseHeaderReturn(AJShippingLine);
+                PopulateFromPurchaseHeaderReturn(AJShippingLine, ChangeShipFrom);
 
             AJShippingLine."Source Document Type"::Order,
             AJShippingLine."Source Document Type"::Invoice:
-                PopulateFromPurchaseHeaderOrder(AJShippingLine);
+                PopulateFromPurchaseHeaderOrder(AJShippingLine, ChangeShipFrom);
         end;
     end;
 
-    local procedure PopulateFromPurchaseHeaderOrder(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromPurchaseHeaderOrder(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     var
         PurchaseHeader: Record "Purchase Header";
         AJShippingHeader: Record "AJ Shipping Header";
@@ -234,18 +237,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
         //AJShippingHeader."Custom Field 3" := PurchaseHeader."No.";
         AJShippingHeader."Ship Date" := PurchaseHeader."Order Date";
 
-        if Location.Get(PurchaseHeader."Location Code") then begin
-            AJShippingHeader."Ship-from Location Code" := Location.Code;
-            AJShippingHeader."Ship-from Name" := Location.Name;
-            AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
-            AJShippingHeader."Ship-from Address 1" := Location.Address;
-            AJShippingHeader."Ship-from Address 2" := Location."Address 2";
-            AJShippingHeader."Ship-from City" := Location.City;
-            AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
-            AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-            AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
-            AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-        end;
+        if ChangeShipFrom then
+            if Location.Get(PurchaseHeader."Location Code") then begin
+                AJShippingHeader."Ship-from Location Code" := Location.Code;
+                AJShippingHeader."Ship-from Name" := Location.Name;
+                AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
+                AJShippingHeader."Ship-from Address 1" := Location.Address;
+                AJShippingHeader."Ship-from Address 2" := Location."Address 2";
+                AJShippingHeader."Ship-from City" := Location.City;
+                AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
+                AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
+                AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
+                AJShippingHeader."Ship-from Phone" := Location."Phone No.";
+            end;
 
         AJShippingHeader."Ship-from Residential" := false;
 
@@ -278,7 +282,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromPurchaseHeaderReturn(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromPurchaseHeaderReturn(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     var
         PurchaseHeader: Record "Purchase Header";
         AJShippingHeader: Record "AJ Shipping Header";
@@ -292,18 +296,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
         //AJShippingHeader."Custom Field 3" := PurchaseHeader."No.";
         AJShippingHeader."Ship Date" := PurchaseHeader."Order Date";
 
-        if Location.Get(PurchaseHeader."Location Code") then begin
-            AJShippingHeader."Ship-from Location Code" := Location.Code;
-            AJShippingHeader."Ship-from Name" := Location.Name;
-            AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
-            AJShippingHeader."Ship-from Address 1" := Location.Address;
-            AJShippingHeader."Ship-from Address 2" := Location."Address 2";
-            AJShippingHeader."Ship-from City" := Location.City;
-            AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
-            AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-            AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
-            AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-        end;
+        if ChangeShipFrom then
+            if Location.Get(PurchaseHeader."Location Code") then begin
+                AJShippingHeader."Ship-from Location Code" := Location.Code;
+                AJShippingHeader."Ship-from Name" := Location.Name;
+                AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
+                AJShippingHeader."Ship-from Address 1" := Location.Address;
+                AJShippingHeader."Ship-from Address 2" := Location."Address 2";
+                AJShippingHeader."Ship-from City" := Location.City;
+                AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
+                AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
+                AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
+                AJShippingHeader."Ship-from Phone" := Location."Phone No.";
+            end;
 
         AJShippingHeader."Ship-from Residential" := false;
 
@@ -336,7 +341,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromTransferHeader(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromTransferHeader(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     var
         TransferHeader: Record "Transfer Header";
         AJShippingHeader: Record "AJ Shipping Header";
@@ -351,20 +356,21 @@ codeunit 37072402 "AJ Fill Shipping Process"
         ////AJShippingHeader."Custom Field 2" := TransferHeader."Your Reference";
         //AJShippingHeader."Custom Field 3" := TransferHeader."External Document No.";
         AJShippingHeader."Ship Date" := TransferHeader."Posting Date";
+        if ChangeShipFrom then begin
+            AJShippingHeader."Ship-from Location Code" := TransferHeader."Transfer-from Code";
+            AJShippingHeader."Ship-from Name" := TransferHeader."Transfer-from Name";
+            AJShippingHeader."Ship-from Company" := CopyStr(TransferHeader."Transfer-from Name", 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
+            AJShippingHeader."Ship-from Address 1" := TransferHeader."Transfer-from Address";
+            AJShippingHeader."Ship-from Address 2" := TransferHeader."Transfer-from Address 2";
+            AJShippingHeader."Ship-from City" := TransferHeader."Transfer-from City";
+            AJShippingHeader."Ship-from State" := CopyStr(TransferHeader."Transfer-from County", 1, MaxStrLen(AJShippingHeader."Ship-from State"));
+            AJShippingHeader."Ship-from Zip" := CopyStr(TransferHeader."Transfer-from Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
+            Location.Get(TransferHeader."Transfer-from Code");
+            AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
+            AJShippingHeader."Ship-from Phone" := Location."Phone No.";
 
-        AJShippingHeader."Ship-from Location Code" := TransferHeader."Transfer-from Code";
-        AJShippingHeader."Ship-from Name" := TransferHeader."Transfer-from Name";
-        AJShippingHeader."Ship-from Company" := CopyStr(TransferHeader."Transfer-from Name", 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
-        AJShippingHeader."Ship-from Address 1" := TransferHeader."Transfer-from Address";
-        AJShippingHeader."Ship-from Address 2" := TransferHeader."Transfer-from Address 2";
-        AJShippingHeader."Ship-from City" := TransferHeader."Transfer-from City";
-        AJShippingHeader."Ship-from State" := CopyStr(TransferHeader."Transfer-from County", 1, MaxStrLen(AJShippingHeader."Ship-from State"));
-        AJShippingHeader."Ship-from Zip" := CopyStr(TransferHeader."Transfer-from Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-        //AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
-        AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-
-        AJShippingHeader."Ship-from Residential" := false;
-
+            AJShippingHeader."Ship-from Residential" := false;
+        end;
         AJShippingHeader."Ship-To Customer Name" := TransferHeader."Transfer-to Name";
         AJShippingHeader."Ship-To Company" := TransferHeader."Transfer-to Name";
         AJShippingHeader."Ship-To Customer Address 1" := TransferHeader."Transfer-to Address";
@@ -384,7 +390,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromTransferShipment(AJShippingLine: Record "AJ Shipping Line")
+    local procedure PopulateFromTransferShipment(AJShippingLine: Record "AJ Shipping Line"; ChangeShipFrom: Boolean)
     var
         TransferShipHeader: Record "Transfer Shipment Header";
         AJShippingHeader: Record "AJ Shipping Header";
@@ -405,8 +411,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-from City" := TransferShipHeader."Transfer-from City";
         AJShippingHeader."Ship-from State" := CopyStr(TransferShipHeader."Transfer-from County", 1, MaxStrLen(AJShippingHeader."Ship-from State"));
         AJShippingHeader."Ship-from Zip" := CopyStr(TransferShipHeader."Transfer-from Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-        //AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
+        Location.Get(TransferShipHeader."Transfer-from Code");
+        AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
         AJShippingHeader."Ship-from Phone" := Location."Phone No.";
+
 
         AJShippingHeader."Ship-from Residential" := false;
 
@@ -440,12 +448,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
         AJShippingLine2.Reset();
         AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"36");
+        AJShippingLine2.SetRange("Source ID", SalesHeader."No.");
+        if not AJShippingLine2.IsEmpty() then
+            exit;
+        AJShippingLine2.SetRange("Source Table");
+        AJShippingLine2.SetRange("Source ID");
+
         if AJShippingLine2.FindLast() then
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
         AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
-        AJShippingLine."Source Type" := AJShippingLine."Source Type"::Document;
+        AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source ID" := SalesHeader."No.";
         AJShippingLine."Source Document Type" := SalesHeader."Document Type";
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"36";
@@ -465,12 +480,19 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
         AJShippingLine2.Reset();
         AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"38");
+        AJShippingLine2.SetRange("Source ID", PurchaseHeader."No.");
+        if not AJShippingLine2.IsEmpty() then
+            exit;
+        AJShippingLine2.SetRange("Source Table");
+        AJShippingLine2.SetRange("Source ID");
+
         if AJShippingLine2.FindLast() then
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
         AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
-        AJShippingLine."Source Type" := AJShippingLine."Source Type"::Document;
+        AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source ID" := PurchaseHeader."No.";
         AJShippingLine."Source Document Type" := PurchaseHeader."Document Type";
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"38";
@@ -488,13 +510,20 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
         AJShippingLine2.Reset();
         AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"112");
+        AJShippingLine2.SetRange("Source ID", SalesInvHeader."No.");
+        if not AJShippingLine2.IsEmpty() then
+            exit;
+        AJShippingLine2.SetRange("Source Table");
+        AJShippingLine2.SetRange("Source ID");
+
         if AJShippingLine2.FindLast() then
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
         AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
         AJShippingLine."Source ID" := SalesInvHeader."No.";
-        AJShippingLine."Source Type" := AJShippingLine."Source Type"::Document;
+        AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"112";
         AJShippingLine.Quantity := 1;
@@ -514,13 +543,20 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
         AJShippingLine2.Reset();
         AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"110");
+        AJShippingLine2.SetRange("Source ID", SalesShpHeader."No.");
+        if not AJShippingLine2.IsEmpty() then
+            exit;
+        AJShippingLine2.SetRange("Source Table");
+        AJShippingLine2.SetRange("Source ID");
+
         if AJShippingLine2.FindLast() then
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
         AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
         AJShippingLine."Source ID" := SalesShpHeader."No.";
-        AJShippingLine."Source Type" := AJShippingLine."Source Type"::Document;
+        AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"110";
         AJShippingLine.Quantity := 1;
@@ -537,13 +573,21 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
         AJShippingLine2.Reset();
         AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"5740");
+        AJShippingLine2.SetRange("Source ID", TransferHeader."No.");
+        if not AJShippingLine2.IsEmpty() then
+            exit;
+        AJShippingLine2.SetRange("Source Table");
+        AJShippingLine2.SetRange("Source ID");
+
         if AJShippingLine2.FindLast() then
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
+
         AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
         AJShippingLine."Source ID" := TransferHeader."No.";
-        AJShippingLine."Source Type" := AJShippingLine."Source Type"::Document;
+        AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"5740";
         AJShippingLine.Quantity := 1;
@@ -560,13 +604,20 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
         AJShippingLine2.Reset();
         AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"5744");
+        AJShippingLine2.SetRange("Source ID", TransferShpHeader."No.");
+        if not AJShippingLine2.IsEmpty() then
+            exit;
+        AJShippingLine2.SetRange("Source Table");
+        AJShippingLine2.SetRange("Source ID");
+
         if AJShippingLine2.FindLast() then
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
         AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
         AJShippingLine."Source ID" := TransferShpHeader."No.";
-        AJShippingLine."Source Type" := AJShippingLine."Source Type"::Document;
+        AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"5744";
         AJShippingLine.Quantity := 1;

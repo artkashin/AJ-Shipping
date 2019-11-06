@@ -25,7 +25,6 @@ pageextension 37072410 PageExtansion5742 extends "Transfer Orders"
                     Clear(AJFillShippingLine);
                     AJFillShippingLine.CreateLineFromTransferHeader(FromTransferHeader.RecordId(), AJShippingHeader, AJShippingLine);
                 until FromTransferHeader.Next() = 0;
-            Message('Done');
         end;
     end;
 }

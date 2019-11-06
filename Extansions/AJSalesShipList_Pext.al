@@ -25,7 +25,6 @@ pageextension 37072403 PageExtansion130 extends "Posted Sales Shipments"
                     Clear(AJFillShippingLine);
                     AJFillShippingLine.CreateLineFromSalesShipHeader(FromSalesShipHeader.RecordId(), AJShippingHeader, AJShippingLine);
                 until FromSalesShipHeader.Next() = 0;
-            Message('Done');
         end;
     end;
 }

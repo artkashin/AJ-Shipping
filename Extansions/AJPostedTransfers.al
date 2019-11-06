@@ -25,7 +25,6 @@ pageextension 37072411 PageExtansion5752 extends "Posted Transfer Shipments"
                     Clear(AJFillShippingLine);
                     AJFillShippingLine.CreateLineFromTransferShpHeader(FromTransferHeader.RecordId(), AJShippingHeader, AJShippingLine);
                 until FromTransferHeader.Next() = 0;
-            Message('Done');
         end;
     end;
 }

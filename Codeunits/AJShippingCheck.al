@@ -46,14 +46,22 @@ codeunit 37072403 "AJ Shipping Check"
     begin
         //AJShipHeader.TestField("");
         AJSHippingSetup.Get();
+    end;
+
+    procedure CheckBerforeArchive(AJShipHeader: Record "AJ Shipping Header")
+    var
+
+    begin
 
     end;
 
-    procedure AddLineInShippingAllowed()
+    procedure AddLineInShippingAllowed(AJShipLine: Record "AJ Shipping Line")
     var
+        AJShipHeader: Record "AJ Shipping Header";
     begin
         AJSHippingSetup.Get();
-        if not AJSHippingSetup."Allow Add Lines With B2C" then
+        AJShipHeader.Get(AJShipLine."Shipping No.");
+        if AJShipHeader."B2C Shipping" and not (AJSHippingSetup."Allow Add Lines With B2C") then
             Error('You cannot add lines to this document, because the setting "Allow Add Lines With B2C" in AJ Shipping Setup is not enabled');
     end;
 

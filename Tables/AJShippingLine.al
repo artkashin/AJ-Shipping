@@ -10,21 +10,21 @@ table 37072402 "AJ Shipping Line"
         }
         field(3; "Source Type"; Option)
         {
-            OptionMembers = " ",Document,Item,Comments;
+            OptionMembers = " ","BC Document",Item,Other;
         }
         field(4; "Source Document Type"; Option)
         {
-            OptionMembers = Quote,Order,Invoice,"Credit Memo","Blanket Order","Return Order";
+            OptionMembers = " ",Quote,Order,Invoice,"Credit Memo","Blanket Order","Return Order";
         }
-        field(5; "Source ID"; Text[32])
+        field(5; "Source ID"; Text[30])
         {
-            TableRelation = if ("Source Table" = const("36")) "Sales Header" where("Document Type" = field("Source Document Type")) else
-            if ("Source Table" = const("110")) "Sales Shipment Header" else
-            if ("Source Table" = const("112")) "Sales Invoice Header" else
-            if ("Source Table" = const("38")) "Purchase Header" else
-            if ("Source Table" = const("5740")) "Transfer Header" else
-            if ("Source Table" = const("5744")) "Transfer Shipment Header";
-
+            TableRelation = if ("Source Table" = const("36")) "Sales Header"."No." where("Document Type" = field("Source Document Type")) else
+            if ("Source Table" = const("110")) "Sales Shipment Header"."No." else
+            if ("Source Table" = const("112")) "Sales Invoice Header"."No." else
+            if ("Source Table" = const("38")) "Purchase Header"."No." where("Document Type" = field("Source Document Type")) else
+            if ("Source Table" = const("5740")) "Transfer Header"."No." else
+            if ("Source Table" = const("5744")) "Transfer Shipment Header"."No." else
+            if ("Source Table" = const(" "), "Source Type" = const(Item)) Item."No.";
             trigger OnValidate()
             begin
 
@@ -38,12 +38,10 @@ table 37072402 "AJ Shipping Line"
         field(7; Description; Text[250])
         {
         }
-
         field(8; Quantity; Decimal)
         {
         }
     }
-
     keys
     {
         key(Key1; "Shipping No.", "Line No.")
@@ -51,5 +49,18 @@ table 37072402 "AJ Shipping Line"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    var
+        AJShipLine: Record "AJ Shipping Line";
+    begin
+        AJShipLine.Reset();
+        AJShipLine.SetRange("Shipping No.", "Shipping No.");
+        if AJShipLine.FindLast() then
+            "Line No." := AJShipLine."Line No." + 1000
+        else
+            "Line No." := 1000;
+
+        Quantity := 1;
+    end;
 }
 
