@@ -4,7 +4,7 @@ table 37072401 "AJ Shipping Header"
     LookupPageId = "AJ Shipping Card";
     fields
     {
-        field(1; "Shipping No."; Code[20])
+        field(1; "No."; Code[20])
         {
         }
         field(10; "Order DateTime"; DateTime)
@@ -199,7 +199,7 @@ table 37072401 "AJ Shipping Header"
         }
         field(180; "Total Quantity"; Decimal)
         {
-            CalcFormula = Sum ("AJ Shipping Line".Quantity WHERE("Shipping No." = FIELD("Shipping No.")));
+            CalcFormula = Sum ("AJ Shipping Line".Quantity WHERE("Shipping No." = FIELD("No.")));
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
@@ -208,7 +208,7 @@ table 37072401 "AJ Shipping Header"
 
     keys
     {
-        key(Key1; "Shipping No.")
+        key(Key1; "No.")
         {
             Clustered = true;
         }
@@ -219,10 +219,10 @@ table 37072401 "AJ Shipping Header"
         AJShippingSetup: Record "AJ Shipping Setup";
         NoSeriesManagement: Codeunit NoSeriesManagement;
     begin
-        if "Shipping No." = '' then begin
+        if "No." = '' then begin
             AJShippingSetup.Get();
             AJShippingSetup.TestField("Shipping No. Series");
-            "Shipping No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
+            "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
         end;
 
         if "Ship Date" < Today() then begin
@@ -239,7 +239,7 @@ table 37072401 "AJ Shipping Header"
         AJShipLine: Record "AJ Shipping Line";
     begin
         AJShipLine.Reset();
-        AJShipLine.SetRange("Shipping No.", "Shipping No.");
+        AJShipLine.SetRange("Shipping No.", "No.");
         if not AJShipLine.IsEmpty() then
             AJShipLine.DeleteAll(true);
     end;

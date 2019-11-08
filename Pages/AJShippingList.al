@@ -20,7 +20,7 @@ page 37072401 "AJ Shipping List"
                 {
                     ApplicationArea = All;
                 }
-                field("Shipping No."; "Shipping No.")
+                field("No."; "No.")
                 {
                     ApplicationArea = All;
                 }

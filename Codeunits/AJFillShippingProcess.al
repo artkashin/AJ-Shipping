@@ -436,7 +436,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingCheck.CheckMultiLocationsForSales(SalesHeader);
 
         AJShippingLine2.Reset();
-        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."No.");
         AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"36");
         AJShippingLine2.SetRange("Source ID", SalesHeader."No.");
         if not AJShippingLine2.IsEmpty() then
@@ -448,7 +448,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
-        AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
+        AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source ID" := SalesHeader."No.";
         AJShippingLine."Source Document Type" := SalesHeader."Document Type";
@@ -468,7 +468,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingCheck.CheckMultiLocationsForPurchase(PurchaseHeader);
 
         AJShippingLine2.Reset();
-        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."No.");
         AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"38");
         AJShippingLine2.SetRange("Source ID", PurchaseHeader."No.");
         if not AJShippingLine2.IsEmpty() then
@@ -480,7 +480,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
-        AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
+        AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source ID" := PurchaseHeader."No.";
         AJShippingLine."Source Document Type" := PurchaseHeader."Document Type";
@@ -498,7 +498,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         SalesInvHeader.Get(RecordID);
 
         AJShippingLine2.Reset();
-        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."No.");
         AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"112");
         AJShippingLine2.SetRange("Source ID", SalesInvHeader."No.");
         if not AJShippingLine2.IsEmpty() then
@@ -510,7 +510,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
-        AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
+        AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source ID" := SalesInvHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
@@ -531,7 +531,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingCheck.CheckMultiLocationsForSalesShipment(SalesShpHeader);
 
         AJShippingLine2.Reset();
-        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."No.");
         AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"110");
         AJShippingLine2.SetRange("Source ID", SalesShpHeader."No.");
         if not AJShippingLine2.IsEmpty() then
@@ -543,7 +543,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
-        AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
+        AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source ID" := SalesShpHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
@@ -561,7 +561,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         TransferHeader.Get(RecordID);
 
         AJShippingLine2.Reset();
-        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."No.");
         AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"5740");
         AJShippingLine2.SetRange("Source ID", TransferHeader."No.");
         if not AJShippingLine2.IsEmpty() then
@@ -574,7 +574,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         else
             AJShippingLine."Line No." := 1000;
 
-        AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
+        AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source ID" := TransferHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;
@@ -592,7 +592,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         TransferShpHeader.Get(RecordID);
 
         AJShippingLine2.Reset();
-        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."Shipping No.");
+        AJShippingLine2.SetRange("Shipping No.", AJShippingHeader."No.");
         AJShippingLine2.SetRange("Source Table", AJShippingLine2."Source Table"::"5744");
         AJShippingLine2.SetRange("Source ID", TransferShpHeader."No.");
         if not AJShippingLine2.IsEmpty() then
@@ -604,7 +604,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
             AJShippingLine."Line No." := AJShippingLine2."Line No." + 1000
         else
             AJShippingLine."Line No." := 1000;
-        AJShippingLine."Shipping No." := AJShippingHeader."Shipping No.";
+        AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source ID" := TransferShpHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::Invoice;

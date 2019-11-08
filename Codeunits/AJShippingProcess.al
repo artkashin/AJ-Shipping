@@ -11,7 +11,7 @@ codeunit 37072401 "AJ Shipping Process"
         AJShippingSetup.Get();
         if AJShipHeader."B2C Shipping" then begin
             AJShipLine.Reset();
-            AJShipLine.SetRange("Shipping No.", AJShipHeader."Shipping No.");
+            AJShipLine.SetRange("Shipping No.", AJShipHeader."No.");
             if AJShipLine.FindFirst() then
                 if SalesHeader.Get(SalesHeader."Document Type"::Order, AJShipLine."Source ID") then
                     if AJShippingSetup."Post Order with Archive" then begin
@@ -37,7 +37,7 @@ codeunit 37072401 "AJ Shipping Process"
         AJShipHeaderArch."Created DateTime" := CurrentDateTime();
         AJShipHeaderArch.Insert(true);
 
-        AJShipLine.SetRange("Shipping No.", AJShipHeader."Shipping No.");
+        AJShipLine.SetRange("Shipping No.", AJShipHeader."No.");
         if AJShipLine.FindSet() then
             repeat
                 AJShipLineArch.Init();

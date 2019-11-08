@@ -10,7 +10,7 @@ page 37072402 "AJ Shipping Card"
         {
             group(General)
             {
-                field("Shipping No."; "Shipping No.")
+                field("No."; "No.")
                 {
                     ApplicationArea = All;
                 }
@@ -279,7 +279,7 @@ page 37072402 "AJ Shipping Card"
             {
                 ApplicationArea = All;
                 Caption = 'Lines';
-                SubPageLink = "Shipping No." = field("Shipping No.");
+                SubPageLink = "Shipping No." = field("No.");
             }
         }
     }
@@ -322,7 +322,7 @@ page 37072402 "AJ Shipping Card"
                         SalesHeader: Record "Sales Header";
                         SalesList: Page "Sales List";
                     begin
-                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingLine."Shipping No." := Rec."No.";
                         AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
                         SalesHeader.Reset();
                         SalesHeader.SetFilter("Document Type", '<>%1|<>%2', SalesHeader."Document Type"::"Credit Memo", SalesHeader."Document Type"::Quote);
@@ -346,7 +346,7 @@ page 37072402 "AJ Shipping Card"
                         SalesShpHeader: Record "Sales Shipment Header";
                         SalesShipmet: Page "Posted Sales Shipments";
                     begin
-                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingLine."Shipping No." := Rec."No.";
                         AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
                         if "Ship-from Location Code" <> '' then begin
                             SalesShpHeader.SetRange("Location Code", "Ship-from Location Code");
@@ -368,7 +368,7 @@ page 37072402 "AJ Shipping Card"
                         PurchaseHeader: Record "Purchase Header";
                         PurchList: Page "Purchase List";
                     begin
-                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingLine."Shipping No." := Rec."No.";
                         AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
                         if "Ship-from Location Code" <> '' then begin
                             PurchaseHeader.SetRange("Location Code", "Ship-from Location Code");
@@ -390,7 +390,7 @@ page 37072402 "AJ Shipping Card"
                         TransferHeader: Record "Transfer Header";
                         TransferOrders: Page "Transfer Orders";
                     begin
-                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingLine."Shipping No." := Rec."No.";
                         AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
                         if "Ship-from Location Code" <> '' then begin
                             TransferHeader.SetRange("Transfer-from Code", "Ship-from Location Code");
@@ -412,7 +412,7 @@ page 37072402 "AJ Shipping Card"
                         AJShippingLine: Record "AJ Shipping Line";
                         SalesInvoices: Page "Posted Sales Invoices";
                     begin
-                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingLine."Shipping No." := Rec."No.";
                         AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
                         AJShippingLine.Description := "Ship-from Location Code";
                         SalesInvoices.SetLookupForAJShipping(AJShippingLine);
@@ -430,7 +430,7 @@ page 37072402 "AJ Shipping Card"
                         AJShippingLine: Record "AJ Shipping Line";
                         TransferShipments: Page "Posted Transfer Shipments";
                     begin
-                        AJShippingLine."Shipping No." := Rec."Shipping No.";
+                        AJShippingLine."Shipping No." := Rec."No.";
                         AJShippingCheck.AddLineInShippingAllowed(AJShippingLine);
 
                         AJShippingLine.Description := "Ship-from Location Code";
