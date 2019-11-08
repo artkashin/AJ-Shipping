@@ -8,8 +8,8 @@
             "startupObjectId": 37072401,
             "startupObjectType": "Page",
             "breakOnError": true,
-            //"schemaUpdateMode":"Recreate",
-            "schemaUpdateMode":"ForceSync",
+            "schemaUpdateMode":"Recreate",
+            //"schemaUpdateMode":"ForceSync",
             "launchBrowser": true
         }
     ]
