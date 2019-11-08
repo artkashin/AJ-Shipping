@@ -48,18 +48,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship Date" := SalesHeader."Order Date";
 
         if ChangeShipFrom then
-            if Location.Get(SalesHeader."Location Code") then begin
-                AJShippingHeader."Ship-from Location Code" := Location.Code;
-                AJShippingHeader."Ship-from Name" := Location.Name;
-                AJShippingHeader."Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen(AJShippingHeader."Ship-from Company"));
-                AJShippingHeader."Ship-from Address 1" := Location.Address;
-                AJShippingHeader."Ship-from Address 2" := Location."Address 2";
-                AJShippingHeader."Ship-from City" := Location.City;
-                AJShippingHeader."Ship-from State" := CopyStr(Location.County, 1, MaxStrLen(AJShippingHeader."Ship-from State"));
-                AJShippingHeader."Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen(AJShippingHeader."Ship-from Zip"));
-                AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
-                AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-            end;
+            AJShippingHeader.Validate("Ship-from Location Code", Location.Code);
 
         AJShippingHeader."Ship-from Residential" := false;
 
@@ -368,9 +357,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
             Location.Get(TransferHeader."Transfer-from Code");
             AJShippingHeader."Ship-from Country Code" := Location."Country/Region Code";
             AJShippingHeader."Ship-from Phone" := Location."Phone No.";
-
             AJShippingHeader."Ship-from Residential" := false;
         end;
+
         AJShippingHeader."Ship-To Customer Name" := TransferHeader."Transfer-to Name";
         AJShippingHeader."Ship-To Company" := TransferHeader."Transfer-to Name";
         AJShippingHeader."Ship-To Customer Address 1" := TransferHeader."Transfer-to Address";

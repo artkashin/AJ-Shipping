@@ -38,6 +38,10 @@ page 37072400 "AJ Shipping Setup"
                 {
                     ApplicationArea = All;
                 }
+                field("Weight Option"; "Weight Option")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

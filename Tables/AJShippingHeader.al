@@ -23,6 +23,16 @@ table 37072401 "AJ Shipping Header"
         field(30; "B2C Shipping"; Boolean)
         {
         }
+        field(38; "Weight Unit of Measure"; Code[10])
+        {
+            Caption = 'Weight Unit of Measure';
+            TableRelation = "Unit of Measure".Code;
+        }
+        field(39; "Dimension Unit of Measure"; Code[10])
+        {
+            Caption = 'Dimension Unit of Measure';
+            TableRelation = "Unit of Measure";
+        }
         field(40; "Product Weight"; Decimal)
         {
         }
@@ -52,16 +62,17 @@ table 37072401 "AJ Shipping Header"
             var
                 Location: Record Location;
             begin
-                if Location.Get("Ship-from Location Code") then;
-                "Ship-from Name" := Location.Name;
-                "Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-from Company"));
-                "Ship-from Address 1" := Location.Address;
-                "Ship-from Address 2" := Location."Address 2";
-                "Ship-from City" := Location.City;
-                "Ship-from State" := CopyStr(Location.County, 1, MaxStrLen("Ship-from State"));
-                "Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-from Zip"));
-                "Ship-from Country Code" := Location."Country/Region Code";
-                "Ship-from Phone" := Location."Phone No.";
+                if Location.Get("Ship-from Location Code") then begin
+                    "Ship-from Name" := Location.Name;
+                    "Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-from Company"));
+                    "Ship-from Address 1" := Location.Address;
+                    "Ship-from Address 2" := Location."Address 2";
+                    "Ship-from City" := Location.City;
+                    "Ship-from State" := CopyStr(Location.County, 1, MaxStrLen("Ship-from State"));
+                    "Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-from Zip"));
+                    "Ship-from Country Code" := Location."Country/Region Code";
+                    "Ship-from Phone" := Location."Phone No.";
+                end;
             end;
         }
         field(61; "Ship-from Name"; Text[100])
@@ -111,16 +122,17 @@ table 37072401 "AJ Shipping Header"
             var
                 Location: Record Location;
             begin
-                if Location.Get("Ship-to Location Code") then;
-                "Ship-to Customer Name" := Location.Name;
-                "Ship-to Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-to Company"));
-                "Ship-to Customer Address 1" := Location.Address;
-                "Ship-to Customer Address 2" := Location."Address 2";
-                "Ship-to Customer City" := Location.City;
-                "Ship-to Customer State" := CopyStr(Location.County, 1, MaxStrLen("Ship-to Customer State"));
-                "Ship-to Customer Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-to Customer Zip"));
-                "Ship-to Customer Country" := Location."Country/Region Code";
-                "Ship-to Customer Phone" := Location."Phone No.";
+                if Location.Get("Ship-to Location Code") then begin
+                    "Ship-to Customer Name" := Location.Name;
+                    "Ship-to Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-to Company"));
+                    "Ship-to Customer Address 1" := Location.Address;
+                    "Ship-to Customer Address 2" := Location."Address 2";
+                    "Ship-to Customer City" := Location.City;
+                    "Ship-to Customer State" := CopyStr(Location.County, 1, MaxStrLen("Ship-to Customer State"));
+                    "Ship-to Customer Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-to Customer Zip"));
+                    "Ship-to Customer Country" := Location."Country/Region Code";
+                    "Ship-to Customer Phone" := Location."Phone No.";
+                end;
             end;
         }
         field(80; "Ship-To Customer Name"; Text[100])

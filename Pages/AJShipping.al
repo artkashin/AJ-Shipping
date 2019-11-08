@@ -236,8 +236,20 @@ page 37072402 "AJ Shipping Card"
                     Importance = Additional;
                 }
             }
-            group("Weight characteristics")
+            group("Dimensions")
             {
+                field("Weight Unit of Measure"; "Weight Unit of Measure")
+                {
+                    Visible = false;
+                    ApplicationArea = All;
+                    Importance = Additional;
+                }
+                field("Dimension Unit of Measure"; "Dimension Unit of Measure")
+                {
+                    Visible = false;
+                    ApplicationArea = All;
+                    Importance = Additional;
+                }
                 field(AJWOH_PrdWgt; "Product Weight")
                 {
                     ApplicationArea = All;
@@ -286,9 +298,14 @@ page 37072402 "AJ Shipping Card"
                     Image = Archive;
                     Caption = 'Move to Archive';
                     trigger OnAction()
+                    var
                     begin
-                        if Confirm('Move this document to the archive?') then
-                            AJShippingProcess.MoveToArchive(Rec);
+                        //BindSubscription(AJShipmentEventSub);
+
+                        //if Confirm('Move this document to the archive?') then                        
+                        AJShippingProcess.ArchiveShipping(Rec);
+
+                        //UnbindSubscription(AJShipmentEventSub);                        
                     end;
                 }
             }
@@ -311,6 +328,7 @@ page 37072402 "AJ Shipping Card"
                         SalesHeader.SetFilter("Document Type", '<>%1|<>%2', SalesHeader."Document Type"::"Credit Memo", SalesHeader."Document Type"::Quote);
                         if "Ship-from Location Code" <> '' then
                             SalesHeader.SetRange("Location Code", "Ship-from Location Code");
+
                         SalesList.SetTableView(SalesHeader);
                         SalesList.SetLookupForAJShipping(AJShippingLine);
                         SalesList.LookupMode(true);

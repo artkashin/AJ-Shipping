@@ -28,6 +28,14 @@ table 37072400 "AJ Shipping Setup"
         field(35; "Change Ship Date in Order"; Boolean)
         {
         }
+        field(40; "Weight Option"; Option)
+        {
+            OptionCaption = 'Default,Scalemanagement,Calculated';
+            OptionMembers = Default,Scalemanagement,Calculated;
+        }
+        field(45; "Post Order with Archive"; Boolean)
+        {
+        }
     }
 
     keys

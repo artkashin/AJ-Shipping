@@ -1,5 +1,28 @@
 codeunit 37072401 "AJ Shipping Process"
 {
+    procedure ArchiveShipping(AJShipHeader: Record "AJ Shipping Header")
+    var
+        SalesHeader: Record "Sales Header";
+        AJShipLine: Record "AJ Shipping Line";
+        AJShippingSetup: Record "AJ Shipping Setup";
+        GenGLpost: Codeunit "Gen. Jnl.-Post Preview";
+        SalesPost: Codeunit "Sales-Post (Yes/No)";
+    begin
+        AJShippingSetup.Get();
+        if AJShipHeader."B2C Shipping" then begin
+            AJShipLine.Reset();
+            AJShipLine.SetRange("Shipping No.", AJShipHeader."Shipping No.");
+            if AJShipLine.FindFirst() then
+                if SalesHeader.Get(SalesHeader."Document Type"::Order, AJShipLine."Source ID") then
+                    if AJShippingSetup."Post Order with Archive" then begin
+                        BindSubscription(SalesPost);
+                        GenGLpost.Preview(SalesPost, SalesHeader);
+                        exit;
+                    end;
+        end;
+        MoveToArchive(AJShipHeader);
+    end;
+
     procedure MoveToArchive(AJShipHeader: Record "AJ Shipping Header")
     var
         AJShipLine: Record "AJ Shipping Line";
