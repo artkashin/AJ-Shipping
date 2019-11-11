@@ -84,7 +84,9 @@ codeunit 37072401 "AJ Shipping Process"
 
         // Populate hedaer fields from line      
         AJFilShippingProcess.PopulateShippingHeaderFromLine(AJShipLine, true);
-        Page.Run(0, AJShipHeader);
+        if not ((AJShipLine."Source Table" = AJShipLine."Source Table"::"36")
+           and (AJShipLine."Source Document Type" = AJShipLine."Source Document Type"::Order)) then
+            Page.Run(0, AJShipHeader); // dodelat'
     end;
 
     var

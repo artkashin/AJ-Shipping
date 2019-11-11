@@ -43,12 +43,12 @@ codeunit 37072402 "AJ Fill Shipping Process"
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         Location: record Location;
     begin
-        SalesHeader.Get(AJShippingLine."Source Document Type", AJShippingLine."Source ID");
-        AJShippingHeader.get(AJShippingLine."Shipping No.");
+        SalesHeader.Get(AJShippingLine."Source Document Type" - 1, AJShippingLine."Source ID");
+        AJShippingHeader.Get(AJShippingLine."Shipping No.");
         AJShippingHeader."Ship Date" := SalesHeader."Order Date";
 
         if ChangeShipFrom then
-            AJShippingHeader.Validate("Ship-from Location Code", Location.Code);
+            AJShippingHeader.Validate("Ship-from Location Code", SalesHeader."Location Code");
 
         AJShippingHeader."Ship-from Residential" := false;
 
@@ -219,7 +219,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         Location: record Location;
     begin
-        PurchaseHeader.Get(AJShippingLine."Source Document Type", AJShippingLine."Source ID");
+        PurchaseHeader.Get(AJShippingLine."Source Document Type" - 1, AJShippingLine."Source ID");
         AJShippingHeader.get(AJShippingLine."Shipping No.");
         //AJShippingHeader."Custom Field 1" := 'ID: ' + PurchaseHeader."Sell-to Customer No." + ' DOC: ' + PurchaseHeader."No.";
         //AJShippingHeader."Custom Field 2" := PurchaseHeader."Your Reference";
@@ -278,7 +278,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         Location: Record Location;
     begin
-        PurchaseHeader.Get(AJShippingLine."Source Document Type", AJShippingLine."Source ID");
+        PurchaseHeader.Get(AJShippingLine."Source Document Type" - 1, AJShippingLine."Source ID");
         AJShippingHeader.get(AJShippingLine."Shipping No.");
         //AJShippingHeader."Custom Field 1" := 'ID: ' + PurchaseHeader."Sell-to Customer No." + ' DOC: ' + PurchaseHeader."No.";
         //AJShippingHeader."Custom Field 2" := PurchaseHeader."Your Reference";
@@ -451,7 +451,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source ID" := SalesHeader."No.";
-        AJShippingLine."Source Document Type" := SalesHeader."Document Type";
+        AJShippingLine."Source Document Type" := SalesHeader."Document Type" + 1;
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"36";
         AJShippingLine.Quantity := 1;
         AJShippingLine.Description := SalesHeader."Posting Description";
@@ -483,7 +483,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingLine."Shipping No." := AJShippingHeader."No.";
         AJShippingLine."Source Type" := AJShippingLine."Source Type"::"BC Document";
         AJShippingLine."Source ID" := PurchaseHeader."No.";
-        AJShippingLine."Source Document Type" := PurchaseHeader."Document Type";
+        AJShippingLine."Source Document Type" := PurchaseHeader."Document Type" + 1;
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"38";
         AJShippingLine.Quantity := 1;
         AJShippingLine.Description := PurchaseHeader."Posting Description";
