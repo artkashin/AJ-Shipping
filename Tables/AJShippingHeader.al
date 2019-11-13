@@ -165,7 +165,7 @@ table 37072401 "AJ Shipping Header"
         field(89; "Ship-To Residential"; Boolean)
         {
         }
-        field(90; "Ship-To Address Verified"; Text[30])
+        field(90; "Ship-To Address Verified"; Text[80])
         {
         }
         field(91; "Ship-To Customer Address 3"; Text[50])

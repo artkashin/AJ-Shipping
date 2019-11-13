@@ -10,6 +10,9 @@ table 37072400 "AJ Shipping Setup"
         {
             TableRelation = "No. Series";
         }
+        field(5; "Domestic Country Code"; Code[10])
+        {
+        }
         field(10; "B2C Shipping"; Boolean)
         {
         }

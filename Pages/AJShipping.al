@@ -232,7 +232,7 @@ page 37072402 "AJ Shipping Card"
                 field("Ship-To Address Verified"; "Ship-To Address Verified")
                 {
                     ApplicationArea = All;
-                    Editable = LocationToCodeFilled;
+                    Editable = false;
                     Importance = Additional;
                 }
             }

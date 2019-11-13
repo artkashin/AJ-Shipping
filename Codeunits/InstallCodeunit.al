@@ -38,6 +38,8 @@ codeunit 37072400 "AJ Shipping InstallCodeunit"
         AjShippingSetup.Init();
         AjShippingSetup."B2C Shipping" := true;
         AjShippingSetup."Shipping No. Series" := 'AJ-SHIP';
+        AjShippingSetup."Weight Option" := AjShippingSetup."Weight Option"::Default;
+        AjShippingSetup."Domestic Country Code" := 'US';
         if AjShippingSetup.Insert() then;
     end;
 

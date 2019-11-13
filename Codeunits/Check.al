@@ -37,8 +37,7 @@ codeunit 37072403 "AJ Shipping Check"
                 or (PurchaseLine."Location Code" <> PurchaseHeader."Location Code") then
                     Error('Shipment cannot be created, select 1 дщсфешщт сщву for header and all lines');
             until PurchaseLine.Next() = 0;
-        end else
-            Error('Creating a Shipping is forbidden, you have no Lines');
+        end;
     end;
 
     procedure ReadyForArchive(AJShipHeader: Record "AJ Shipping Header")
@@ -82,8 +81,7 @@ codeunit 37072403 "AJ Shipping Check"
                 or (SalesLine."Location Code" <> SalesHeader."Location Code") then
                     Error('Shipment cannot be created, select 1 Loaction code for header and all lines');
             until SalesLine.Next() = 0;
-        end else
-            Error('Creating a Shipping is forbidden, you have no Lines');
+        end;
     end;
 
     procedure CheckTransferBeforaCreateShipping(TransferHeader: Record "Transfer Header")
@@ -91,10 +89,10 @@ codeunit 37072403 "AJ Shipping Check"
         TransferLine: Record "Transfer Line";
     begin
         TransferHeader.TestField("Transfer-from Code");
-        TransferLine.Reset();
-        TransferLine.SetRange("Document No.", TransferHeader."No.");
-        if TransferLine.IsEmpty() then
-            Error('Creating a Shipping is forbidden, you have no Lines');
+        //TransferLine.Reset();
+        //TransferLine.SetRange("Document No.", TransferHeader."No.");
+        //if TransferLine.IsEmpty() then
+        //Error('Creating a Shipping is forbidden, you have no Lines');
     end;
 
     procedure CheckMultiLocationsForSalesShipment(SalesShpHeader: Record "Sales Shipment Header")
@@ -109,7 +107,7 @@ codeunit 37072403 "AJ Shipping Check"
             repeat
                 if (SalesShpLine."Location Code" <> LineLocation)
                 or (SalesShpLine."Location Code" <> SalesShpHeader."Location Code") then
-                    Error('Shipment cannot be created, select 1 дщсфешщт сщву for header and all lines');
+                    Error('Shipment cannot be created, select 1 Loaction code for header and all lines');
             until SalesShpLine.Next() = 0;
         end;
     end;

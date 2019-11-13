@@ -14,6 +14,10 @@ page 37072400 "AJ Shipping Setup"
                 {
                     ApplicationArea = All;
                 }
+                field("Domestic Country Code"; "Domestic Country Code")
+                {
+                    ApplicationArea = All;
+                }
                 field("B2C Shipping"; "B2C Shipping")
                 {
                     ApplicationArea = All;

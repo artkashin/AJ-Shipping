@@ -41,6 +41,7 @@ page 37072403 "AJ Shipping Subform"
                 {
                     ApplicationArea = All;
                 }
+
             }
         }
     }
