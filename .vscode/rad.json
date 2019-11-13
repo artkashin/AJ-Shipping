@@ -1,1 +1,1 @@
-﻿{"Added":[],"Modified":[{"Id":37072401,"Kind":11,"Name":"AJ Shipping Process","PackagePath":"/src/Codeunits/Process.al"},{"Id":37072402,"Kind":11,"Name":"AJ Fill Shipping Process","PackagePath":"/src/Codeunits/FillShippingProcess.al"},{"Id":37072401,"Kind":10,"Name":"AJ Shipping Header","PackagePath":"/src/Tables/AJShippingHeader.al"}],"Removed":[]}
+﻿{"Added":[],"Modified":[{"Id":37072401,"Kind":10,"Name":"AJ Shipping Header","PackagePath":"/src/Tables/AJShippingHeader.al"}],"Removed":[]}

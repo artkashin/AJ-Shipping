@@ -149,7 +149,7 @@ table 37072401 "AJ Shipping Header"
             trigger OnValidate()
             begin
                 if AJShippingSetup.Get() then
-                    "International Shipment" := AJShippingSetup."Domestic Country Code" = "Ship-To Customer Country";
+                    "International Shipment" := AJShippingSetup."Domestic Country Code" <> "Ship-To Customer Country";
             end;
         }
         field(83; "Ship-To Customer State"; Text[20])
