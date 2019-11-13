@@ -63,7 +63,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-To Customer City" := SalesHeader."Ship-to City";
         AJShippingHeader."Ship-To Customer State" := CopyStr(SalesHeader."Ship-to County", 1, MaxStrLen(AJShippingHeader."Ship-To Customer State"));
         AJShippingHeader."Ship-To Customer Zip" := CopyStr(SalesHeader."Ship-to Post Code", 1, MaxStrLen(AJShippingHeader."Ship-To Customer Zip"));
-        AJShippingHeader."Ship-To Customer Country" := SalesHeader."Ship-to Country/Region Code";
+        AJShippingHeader.Validate("Ship-To Customer Country", SalesHeader."Ship-to Country/Region Code");
         //AJShippingHeader."Ship-To Phone" := SalesHeader."Ship-to Phone No.";
         AJShippingHeader."Ship-To Residential" := false;
         //AJShippingHeader."Ship-To E-mail" := SalesHeader."Ship-to E-Mail";
@@ -122,7 +122,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-To Customer City" := SalesInvHeader."Ship-to City";
         AJShippingHeader."Ship-To Customer State" := CopyStr(SalesInvHeader."Ship-to County", 1, MaxStrLen(AJShippingHeader."Ship-To Customer State"));
         AJShippingHeader."Ship-To Customer Zip" := CopyStr(SalesInvHeader."Ship-to Post Code", 1, MaxStrLen(AJShippingHeader."Ship-To Customer Zip"));
-        AJShippingHeader."Ship-To Customer Country" := SalesInvHeader."Ship-to Country/Region Code";
+        AJShippingHeader.Validate("Ship-To Customer Country", SalesInvHeader."Ship-to Country/Region Code");
         //AJShippingHeader."Ship-To Phone" := SalesInvHeader."Ship-to Phone No.";
         AJShippingHeader."Ship-To Residential" := false;
         //AJShippingHeader."Ship-To E-mail" := SalesInvHeader."Ship-to E-Mail";
@@ -182,7 +182,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-To Customer City" := SalesShipmentHeader."Ship-to City";
         AJShippingHeader."Ship-To Customer State" := CopyStr(SalesShipmentHeader."Ship-to County", 1, MaxStrLen(AJShippingHeader."Ship-To Customer State"));
         AJShippingHeader."Ship-To Customer Zip" := CopyStr(SalesShipmentHeader."Ship-to Post Code", 1, MaxStrLen(AJShippingHeader."Ship-To Customer Zip"));
-        AJShippingHeader."Ship-To Customer Country" := SalesShipmentHeader."Ship-to Country/Region Code";
+        AJShippingHeader.Validate("Ship-To Customer Country", SalesShipmentHeader."Ship-to Country/Region Code");
         //AJShippingHeader."Ship-To Phone" := SalesShipmentHeader."Ship-to Phone No.";
         AJShippingHeader."Ship-To Residential" := false;
         //AJShippingHeader."Ship-To E-mail" := SalesShipmentHeader."Ship-to E-Mail";
@@ -253,7 +253,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-To Customer City" := PurchaseHeader."Ship-to City";
         AJShippingHeader."Ship-To Customer State" := CopyStr(PurchaseHeader."Ship-to County", 1, MaxStrLen(AJShippingHeader."Ship-To Customer State"));
         AJShippingHeader."Ship-To Customer Zip" := CopyStr(PurchaseHeader."Ship-to Post Code", 1, MaxStrLen(AJShippingHeader."Ship-To Customer Zip"));
-        AJShippingHeader."Ship-To Customer Country" := PurchaseHeader."Ship-to Country/Region Code";
+        AJShippingHeader.Validate("Ship-To Customer Country", PurchaseHeader."Ship-to Country/Region Code");
         //AJShippingHeader."Ship-To Phone" := PurchaseHeader."Ship-to Phone No.";
         AJShippingHeader."Ship-To Residential" := false;
         //AJShippingHeader."Ship-To E-mail" := PurchaseHeader."Ship-to E-Mail";
@@ -312,7 +312,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-To Customer City" := PurchaseHeader."Ship-to City";
         AJShippingHeader."Ship-To Customer State" := CopyStr(PurchaseHeader."Ship-to County", 1, MaxStrLen(AJShippingHeader."Ship-To Customer State"));
         AJShippingHeader."Ship-To Customer Zip" := CopyStr(PurchaseHeader."Ship-to Post Code", 1, MaxStrLen(AJShippingHeader."Ship-To Customer Zip"));
-        AJShippingHeader."Ship-To Customer Country" := PurchaseHeader."Ship-to Country/Region Code";
+        AJShippingHeader.Validate("Ship-To Customer Country", PurchaseHeader."Ship-to Country/Region Code");
         //AJShippingHeader."Ship-To Phone" := PurchaseHeader."Ship-to Phone No.";
         AJShippingHeader."Ship-To Residential" := false;
         //AJShippingHeader."Ship-To E-mail" := PurchaseHeader."Ship-to E-Mail";
@@ -371,7 +371,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-To Customer City" := TransferHeader."Transfer-to City";
         AJShippingHeader."Ship-To Customer State" := CopyStr(TransferHeader."Transfer-to County", 1, MaxStrLen(AJShippingHeader."Ship-To Customer State"));
         AJShippingHeader."Ship-To Customer Zip" := CopyStr(TransferHeader."Transfer-to Post Code", 1, MaxStrLen(AJShippingHeader."Ship-To Customer Zip"));
-        //AJShippingHeader."Ship-To Customer Country" := TransferHeader.transf "Transfer-to Country/Region Code";
+        //AJShippingHeader.Validate("Ship-To Customer Country" := TransferHeader.transf "Transfer-to Country/Region Code";
         //AJShippingHeader."Ship-To Phone" := TransferHeader."Transfer-to Phone No.";
         AJShippingHeader."Ship-To Residential" := false;
         //AJShippingHeader."Ship-To E-mail" 
@@ -418,7 +418,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader."Ship-To Customer City" := TransferShipHeader."Transfer-to City";
         AJShippingHeader."Ship-To Customer State" := CopyStr(TransferShipHeader."Transfer-to County", 1, MaxStrLen(AJShippingHeader."Ship-To Customer State"));
         AJShippingHeader."Ship-To Customer Zip" := CopyStr(TransferShipHeader."Transfer-to Post Code", 1, MaxStrLen(AJShippingHeader."Ship-To Customer Zip"));
-        //AJShippingHeader."Ship-To Customer Country" := TransferShipHeader.transf "Transfer-to Country/Region Code";
+        //AJShippingHeader.Validate("Ship-To Customer Country" := TransferShipHeader.transf "Transfer-to Country/Region Code";
         //AJShippingHeader."Ship-To Phone" := TransferShipHeader."Transfer-to Phone No.";
         AJShippingHeader."Ship-To Residential" := false;
         //AJShippingHeader."Ship-To E-mail" 

@@ -20,6 +20,9 @@ table 37072401 "AJ Shipping Header"
         field(22; "Shipped DateTime"; DateTime)
         {
         }
+        field(25; "International Shipment"; Boolean)
+        {
+        }
         field(30; "B2C Shipping"; Boolean)
         {
         }
@@ -143,6 +146,11 @@ table 37072401 "AJ Shipping Header"
         }
         field(82; "Ship-To Customer Country"; Text[10])
         {
+            trigger OnValidate()
+            begin
+                if AJShippingSetup.Get() then
+                    "International Shipment" := AJShippingSetup."Domestic Country Code" = "Ship-To Customer Country";
+            end;
         }
         field(83; "Ship-To Customer State"; Text[20])
         {
@@ -216,11 +224,12 @@ table 37072401 "AJ Shipping Header"
 
     trigger OnInsert()
     var
-        AJShippingSetup: Record "AJ Shipping Setup";
         NoSeriesManagement: Codeunit NoSeriesManagement;
     begin
+        if not AJShippingSetup.Get() then
+            AJShippingSetup.Init();
+
         if "No." = '' then begin
-            AJShippingSetup.Get();
             AJShippingSetup.TestField("Shipping No. Series");
             "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
         end;
@@ -231,7 +240,6 @@ table 37072401 "AJ Shipping Header"
 
             "Ship Date" := Today()
         end;
-
     end;
 
     trigger OnDelete()
@@ -243,5 +251,8 @@ table 37072401 "AJ Shipping Header"
         if not AJShipLine.IsEmpty() then
             AJShipLine.DeleteAll(true);
     end;
+
+    var
+        AJShippingSetup: Record "AJ Shipping Setup";
 }
 
