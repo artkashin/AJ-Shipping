@@ -42,6 +42,18 @@ table 37072411 "AJ Shipping Line Arch."
         field(8; Quantity; Decimal)
         {
         }
+        field(15; "Product Weight"; Decimal)
+        {
+        }
+        field(16; "Product Width"; Decimal)
+        {
+        }
+        field(17; "Product Length"; Decimal)
+        {
+        }
+        field(18; "Product Height"; Decimal)
+        {
+        }
     }
 
     keys

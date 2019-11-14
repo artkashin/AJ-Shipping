@@ -20,7 +20,7 @@ page 37072405 "AJ Shipping Arch. List"
                 {
                     ApplicationArea = All;
                 }
-                field("Shipping No."; "Shipping No.")
+                field("Shipping No."; "No.")
                 {
                     ApplicationArea = All;
                 }

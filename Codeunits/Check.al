@@ -47,13 +47,6 @@ codeunit 37072403 "AJ Shipping Check"
         AJSHippingSetup.Get();
     end;
 
-    procedure CheckBerforeArchive(AJShipHeader: Record "AJ Shipping Header")
-    var
-
-    begin
-
-    end;
-
     procedure AddLineInShippingAllowed(AJShipLine: Record "AJ Shipping Line")
     var
         AJShipHeader: Record "AJ Shipping Header";

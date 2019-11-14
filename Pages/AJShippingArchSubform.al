@@ -34,6 +34,22 @@ page 37072407 "AJ Shipping Arch. Subform"
                 {
                     ApplicationArea = All;
                 }
+                field("Product Weight"; "Product Weight")
+                {
+                    ApplicationArea = All;
+                }
+                field("Product Width"; "Product Width")
+                {
+                    ApplicationArea = All;
+                }
+                field("Product Length"; "Product Length")
+                {
+                    ApplicationArea = All;
+                }
+                field("Product Height"; "Product Height")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

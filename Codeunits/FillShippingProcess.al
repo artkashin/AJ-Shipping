@@ -430,7 +430,14 @@ codeunit 37072402 "AJ Fill Shipping Process"
     var
         AJShippingLine2: Record "AJ Shipping Line";
         SalesHeader: Record "Sales Header";
+        SalesLine: Record "Sales Line";
+        Item: Record Item;
+        ItemAttributeValMap: Record "Item Attribute Value Mapping";
         AJShippingCheck: Codeunit "AJ Shipping Check";
+        Weight: Decimal;
+        Width: Decimal;
+        Height: Decimal;
+        Length: Decimal;
     begin
         SalesHeader.Get(RecordID);
         AJShippingCheck.CheckMultiLocationsForSales(SalesHeader);
@@ -455,6 +462,33 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingLine."Source Table" := AJShippingLine."Source Table"::"36";
         AJShippingLine.Quantity := 1;
         AJShippingLine.Description := SalesHeader."Posting Description";
+
+        Clear(Weight);
+        Clear(Height);
+        Clear(Width);
+        Clear(Length);
+        SalesLine.Reset();
+        SalesLine.SetRange("Document No.", SalesHeader."No.");
+        SalesLine.SetRange(Type, SalesLine.Type::Item);
+        if SalesLine.FindSet() then
+            repeat
+                if Item.Get() then begin
+                    Weight += Item."Net Weight";
+
+                    ItemAttributeValMap.Reset();
+                    //if Height < Item.leng
+                    //Height
+                end;
+            until SalesLine.Next() = 0;
+        AJShippingLine."Product Weight" := Weight;
+        AJShippingLine."Product Height" := Height;
+        AJShippingLine."Product Width" := Width;
+        AJShippingLine."Product Length" := Length;
+
+        AJShippingLine."Product Weight" := 1;
+        AJShippingLine."Product Height" := 1;
+        AJShippingLine."Product Width" := 1;
+        AJShippingLine."Product Length" := 1;
         AJShippingLine.Insert();
     end;
 

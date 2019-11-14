@@ -4,7 +4,7 @@ table 37072410 "AJ Shipping Header Arch."
     LookupPageId = "AJ Shipping Arch. Card";
     fields
     {
-        field(1; "Shipping No."; Code[20])
+        field(1; "No."; Code[20])
         {
         }
         field(10; "Order DateTime"; DateTime)
@@ -20,11 +20,21 @@ table 37072410 "AJ Shipping Header Arch."
         field(22; "Shipped DateTime"; DateTime)
         {
         }
+        field(25; "International Shipment"; Boolean)
+        {
+        }
         field(30; "B2C Shipping"; Boolean)
         {
         }
-        field(39; "Product Weight Unit"; Text[30])
+        field(38; "Weight Unit of Measure"; Code[10])
         {
+            Caption = 'Weight Unit of Measure';
+            TableRelation = "Unit of Measure".Code;
+        }
+        field(39; "Dimension Unit of Measure"; Code[10])
+        {
+            Caption = 'Dimension Unit of Measure';
+            TableRelation = "Unit of Measure";
         }
         field(40; "Product Weight"; Decimal)
         {
@@ -55,16 +65,17 @@ table 37072410 "AJ Shipping Header Arch."
             var
                 Location: Record Location;
             begin
-                Location.Get("Ship-from Location Code");
-                "Ship-from Name" := Location.Name;
-                "Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-from Company"));
-                "Ship-from Address 1" := Location.Address;
-                "Ship-from Address 2" := Location."Address 2";
-                "Ship-from City" := Location.City;
-                "Ship-from State" := CopyStr(Location.County, 1, MaxStrLen("Ship-from State"));
-                "Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-from Zip"));
-                "Ship-from Country Code" := Location."Country/Region Code";
-                "Ship-from Phone" := Location."Phone No.";
+                if Location.Get("Ship-from Location Code") then begin
+                    "Ship-from Name" := Location.Name;
+                    "Ship-from Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-from Company"));
+                    "Ship-from Address 1" := Location.Address;
+                    "Ship-from Address 2" := Location."Address 2";
+                    "Ship-from City" := Location.City;
+                    "Ship-from State" := CopyStr(Location.County, 1, MaxStrLen("Ship-from State"));
+                    "Ship-from Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-from Zip"));
+                    "Ship-from Country Code" := Location."Country/Region Code";
+                    "Ship-from Phone" := Location."Phone No.";
+                end;
             end;
         }
         field(61; "Ship-from Name"; Text[100])
@@ -106,6 +117,27 @@ table 37072410 "AJ Shipping Header Arch."
         field(73; "Ship-from E-mail"; Text[35])
         {
         }
+        field(79; "Ship-To Location Code"; Code[10])
+        {
+            TableRelation = Location;
+
+            trigger OnValidate()
+            var
+                Location: Record Location;
+            begin
+                if Location.Get("Ship-to Location Code") then begin
+                    "Ship-to Customer Name" := Location.Name;
+                    "Ship-to Company" := CopyStr(Location.Name, 1, MaxStrLen("Ship-to Company"));
+                    "Ship-to Customer Address 1" := Location.Address;
+                    "Ship-to Customer Address 2" := Location."Address 2";
+                    "Ship-to Customer City" := Location.City;
+                    "Ship-to Customer State" := CopyStr(Location.County, 1, MaxStrLen("Ship-to Customer State"));
+                    "Ship-to Customer Zip" := CopyStr(Location."Post Code", 1, MaxStrLen("Ship-to Customer Zip"));
+                    "Ship-to Customer Country" := Location."Country/Region Code";
+                    "Ship-to Customer Phone" := Location."Phone No.";
+                end;
+            end;
+        }
         field(80; "Ship-To Customer Name"; Text[100])
         {
         }
@@ -136,7 +168,7 @@ table 37072410 "AJ Shipping Header Arch."
         field(89; "Ship-To Residential"; Boolean)
         {
         }
-        field(90; "Ship-To Address Verified"; Text[30])
+        field(90; "Ship-To Address Verified"; Text[80])
         {
         }
         field(91; "Ship-To Customer Address 3"; Text[50])
@@ -170,7 +202,7 @@ table 37072410 "AJ Shipping Header Arch."
         }
         field(180; "Total Quantity"; Decimal)
         {
-            CalcFormula = Sum ("AJ Shipping Line Arch.".Quantity WHERE("Shipping No." = FIELD("Shipping No.")));
+            CalcFormula = Sum ("AJ Shipping Line Arch.".Quantity WHERE("Shipping No." = FIELD("No.")));
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
@@ -179,7 +211,7 @@ table 37072410 "AJ Shipping Header Arch."
 
     keys
     {
-        key(Key1; "Shipping No.")
+        key(Key1; "No.")
         {
             Clustered = true;
         }
@@ -190,10 +222,10 @@ table 37072410 "AJ Shipping Header Arch."
         AJShippingSetup: Record "AJ Shipping Setup";
         NoSeriesManagement: Codeunit NoSeriesManagement;
     begin
-        if "Shipping No." = '' then begin
+        if "No." = '' then begin
             AJShippingSetup.Get();
             AJShippingSetup.TestField("Shipping No. Series");
-            "Shipping No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
+            "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
         end;
     end;
 }

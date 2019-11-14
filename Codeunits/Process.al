@@ -28,9 +28,8 @@ codeunit 37072401 "AJ Shipping Process"
         AJShipLine: Record "AJ Shipping Line";
         AJShipHeaderArch: Record "AJ Shipping Header Arch.";
         AJShipLineArch: Record "AJ Shipping Line Arch.";
-        AJShippingCheck: Codeunit "AJ Shipping Check";
     begin
-        AJShippingCheck.CheckBerforeArchive(AJShipHeader);
+        OnBeforeMovetoArchive(AJShipHeader);
 
         AJShipHeaderArch.Init();
         AJShipHeaderArch.TransferFields(AJShipHeader);
@@ -87,6 +86,11 @@ codeunit 37072401 "AJ Shipping Process"
         if not ((AJShipLine."Source Table" = AJShipLine."Source Table"::"36")
            and (AJShipLine."Source Document Type" = AJShipLine."Source Document Type"::Order)) then
             Page.Run(0, AJShipHeader); // dodelat'
+    end;
+
+    [IntegrationEvent(true, false)]
+    local procedure OnBeforeMovetoArchive(var ShipHeader: Record "AJ Shipping Header")
+    begin
     end;
 
     var

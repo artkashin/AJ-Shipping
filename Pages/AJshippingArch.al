@@ -12,7 +12,7 @@ page 37072406 "AJ Shipping Arch. Card"
         {
             group(General)
             {
-                field("Shipping No."; "Shipping No.")
+                field("Shipping No."; "No.")
                 {
                     ApplicationArea = All;
                 }
@@ -216,7 +216,7 @@ page 37072406 "AJ Shipping Arch. Card"
             {
                 ApplicationArea = All;
                 Caption = 'Lines';
-                SubPageLink = "Shipping No." = field("Shipping No.");
+                SubPageLink = "Shipping No." = field("No.");
             }
         }
     }
