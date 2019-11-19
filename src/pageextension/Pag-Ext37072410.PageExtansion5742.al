@@ -1,4 +1,4 @@
-pageextension 37072410 PageExtansion5742 extends "Transfer Orders"
+pageextension 37072410 "PageExtansion5742" extends "Transfer Orders"
 {
     var
         AJShippingLine: Record "AJ Shipping Line";

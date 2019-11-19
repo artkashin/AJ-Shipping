@@ -1,4 +1,4 @@
-tableextension 37072400 TableExtansion27 extends "Item"
+tableextension 37072400 "TableExtansion27" extends "Item"
 {
     fields
     {

@@ -1,4 +1,4 @@
-pageextension 37072401 PageExtansion143 extends "Posted Sales Invoices"
+pageextension 37072411 "PageExtansion5752" extends "Posted Transfer Shipments"
 {
     var
         AJShippingLine: Record "AJ Shipping Line";
@@ -12,19 +12,19 @@ pageextension 37072401 PageExtansion143 extends "Posted Sales Invoices"
 
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
-        FromSalesInvHeader: Record "Sales Invoice Header";
+        FromTransferHeader: Record "Transfer Shipment Header";
         AJShippingHeader: Record "AJ Shipping Header";
         AJFillShippingLine: Codeunit "AJ Fill Shipping Process";
     begin
         if LookupforAJShipping and (CloseAction = Action::LookupOK) then begin
             AJShippingHeader.Get(AJShippingLine."Shipping No.");
-            FromSalesInvHeader.Copy(Rec);
-            CurrPage.SetSelectionFilter(FromSalesInvHeader);
-            if FromSalesInvHeader.FindSet() then
+            FromTransferHeader.Copy(Rec);
+            CurrPage.SetSelectionFilter(FromTransferHeader);
+            if FromTransferHeader.FindSet() then
                 repeat
                     Clear(AJFillShippingLine);
-                    AJFillShippingLine.CreateLineFromSalesInvHeader(FromSalesInvHeader.RecordId(), AJShippingHeader, AJShippingLine);
-                until FromSalesInvHeader.Next() = 0;
+                    AJFillShippingLine.CreateLineFromTransferShpHeader(FromTransferHeader.RecordId(), AJShippingHeader, AJShippingLine);
+                until FromTransferHeader.Next() = 0;
         end;
     end;
 }

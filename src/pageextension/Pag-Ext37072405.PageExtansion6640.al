@@ -1,8 +1,8 @@
-pageextension 37072407 PageExtansion132 extends "Posted Sales Shipment"
+pageextension 37072405 "PageExtansion6640" extends "Purchase Return Order"
 {
     actions
     {
-        addafter("&Shipment")
+        addafter(Warehouse)
         {
             group("AJ Shipping")
             {
@@ -22,7 +22,7 @@ pageextension 37072407 PageExtansion132 extends "Posted Sales Shipment"
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                     begin
                         AJShipLineArch.Reset();
-                        AJShipLineArch.SetRange("Source Table", AJShippingLine."Source Table"::"110");
+                        AJShipLineArch.SetRange("Source Table", AJShipLineArch."Source Table"::"38");
                         AJShipLineArch.SetRange("Source ID", "No.");
                         if AJShipLineArch.FindFirst() then begin
                             AJShippingHeaderArch.get(AJShipLineArch."Shipping No.");
@@ -30,7 +30,7 @@ pageextension 37072407 PageExtansion132 extends "Posted Sales Shipment"
                                 Page.Run(0, AJShippingHeaderArch);
                         end else begin
                             AJShippingLine.Reset();
-                            AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"110");
+                            AJShippingLine.SetRange("Source Table", AJShippingLine."Source Table"::"38");
                             AJShippingLine.SetRange("Source ID", "No.");
                             if AJShippingLine.FindFirst() then begin
                                 AJShippingHeader.get(AJShippingLine."Shipping No.");
@@ -38,12 +38,13 @@ pageextension 37072407 PageExtansion132 extends "Posted Sales Shipment"
                                     Page.Run(0, AJShippingHeader);
                             end else
                                 if Confirm('Create Shipping?', true) then begin
-                                    AJShippingLine."Source Table" := AJShippingLine."Source Table"::"110";
-                                    //AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::;
+                                    AJShippingLine."Source Table" := AJShippingLine."Source Table"::"38";
+                                    AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::"Return Order";
+
                                     AJShippingProcess.CreateShipping(AJShippingLine, RecordId())
                                 end else
                                     Message('Action was canceled');
-                        end
+                        end;
                     end;
                 }
             }

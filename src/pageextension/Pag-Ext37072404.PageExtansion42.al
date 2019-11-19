@@ -1,4 +1,4 @@
-pageextension 37072404 PageExtansion42 extends "Sales Order"
+pageextension 37072404 "PageExtansion42" extends "Sales Order"
 {
     actions
     {

@@ -1,4 +1,4 @@
-pageextension 37072402 PageExtansion45 extends "Sales List"
+pageextension 37072402 "PageExtansion45" extends "Sales List"
 {
     var
         AJShippingLine: Record "AJ Shipping Line";

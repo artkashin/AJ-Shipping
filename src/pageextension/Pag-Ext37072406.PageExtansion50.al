@@ -1,4 +1,4 @@
-pageextension 37072405 PageExtansion6640 extends "Purchase Return Order"
+pageextension 37072406 "PageExtansion50" extends "Purchase Order"
 {
     actions
     {
@@ -20,7 +20,11 @@ pageextension 37072405 PageExtansion6640 extends "Purchase Return Order"
                         AJShippingHeaderArch: Record "AJ Shipping Header Arch.";
                         AJShipLineArch: Record "AJ Shipping Line Arch.";
                         AJShippingProcess: Codeunit "AJ Shipping Process";
+                        AJShippingCheck: Codeunit "AJ Shipping Check";
                     begin
+                        if not AJShippingCheck.AllowPurchaseShipping() then
+                            Error('You cannot create Shipping, because the corresponding setting is not enabled in AJ Shipping Setup');
+
                         AJShipLineArch.Reset();
                         AJShipLineArch.SetRange("Source Table", AJShipLineArch."Source Table"::"38");
                         AJShipLineArch.SetRange("Source ID", "No.");
@@ -36,10 +40,11 @@ pageextension 37072405 PageExtansion6640 extends "Purchase Return Order"
                                 AJShippingHeader.get(AJShippingLine."Shipping No.");
                                 if Confirm('AJ Shipping Header already exists for this order \\ would you like to open it?') then
                                     Page.Run(0, AJShippingHeader);
-                            end else
+                            end
+                            else
                                 if Confirm('Create Shipping?', true) then begin
                                     AJShippingLine."Source Table" := AJShippingLine."Source Table"::"38";
-                                    AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::"Return Order";
+                                    AJShippingLine."Source Document Type" := AJShippingLine."Source Document Type"::"Order";
 
                                     AJShippingProcess.CreateShipping(AJShippingLine, RecordId())
                                 end else
