@@ -34,6 +34,7 @@ codeunit 37072401 "AJ Shipping Process"
         AJShipHeaderArch.Init();
         AJShipHeaderArch.TransferFields(AJShipHeader);
         AJShipHeaderArch."Created DateTime" := CurrentDateTime();
+        AJShipHeaderArch."No." := '';
         AJShipHeaderArch.Insert(true);
 
         AJShipLine.SetRange("Shipping No.", AJShipHeader."No.");
@@ -41,10 +42,38 @@ codeunit 37072401 "AJ Shipping Process"
             repeat
                 AJShipLineArch.Init();
                 AJShipLineArch.TransferFields(AJShipLine);
+                AJShipLineArch."Shipping No." := AJShipHeaderArch."No.";
                 AJShipLineArch.Insert();
             until AJShipLine.Next() = 0;
 
+        UpdateSourceDocument(AJShipHeaderArch."No.");
+
         AJShipHeader.Delete(true);
+    end;
+
+    procedure UpdateSourceDocument(ShipNo: Code[20])
+    var
+        AJShipLineArch: Record "AJ Shipping Line Arch.";
+    begin
+        AJShipLineArch.Reset();
+        AJShipLineArch.SetRange("Shipping No.", ShipNo);
+        if AJShipLineArch.FindSet() then
+            repeat
+                case AJShipLineArch."Source Table" of
+                    AJShipLineArch."Source Table"::"36":
+                        UpdateSalesHeader(AJShipLineArch);
+                end;
+            until AJShipLineArch.Next() = 0;
+    end;
+
+    local procedure UpdateSalesHeader(AJShipLineArch: Record "AJ Shipping Line Arch.")
+    var
+        SalesHeader: Record "Sales Header";
+    begin
+        SalesHeader.Get(AJShipLineArch."Source Document Type" - 1, AJShipLineArch."Source ID");
+        SalesHeader."AJ Shipping Status" := SalesHeader."AJ Shipping Status"::Archived;
+        SalesHeader."AJ Shipping No. Arch." := AJShipLineArch."Shipping No.";
+        SalesHeader.Modify();
     end;
 
     procedure CreateShipping(AJShippingLine: Record "AJ Shipping Line"; RecordID: RecordId)

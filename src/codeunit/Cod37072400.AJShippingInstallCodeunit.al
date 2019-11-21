@@ -35,11 +35,29 @@ codeunit 37072400 "AJ Shipping InstallCodeunit"
         NoSeriesLine."Ending No." := 'SP-9999999';
         if NoSeriesLine.Insert() then;
 
+
+        NoSeries.Init();
+        NoSeries.Code := 'AJ-ARCH';
+        NoSeries.Description := 'AJ archive shippings';
+        NoSeries."Default Nos." := true;
+        if NoSeries.Insert() then;
+
+        NoSeriesLine.Init();
+        NoSeriesLine."Series Code" := 'AJ-ARCH';
+        NoSeriesLine."Line No." := 10000;
+        NoSeriesLine."Starting No." := 'SA-0000001';
+        NoSeriesLine."Ending No." := 'SA-9999999';
+        if NoSeriesLine.Insert() then;
+
+
         AjShippingSetup.Init();
         AjShippingSetup."B2C Shipping" := true;
         AjShippingSetup."Shipping No. Series" := 'AJ-SHIP';
+        AjShippingSetup."Arch. Shipping No. Series" := 'AJ-ARCH';
         AjShippingSetup."Weight Option" := AjShippingSetup."Weight Option"::Default;
         AjShippingSetup."Domestic Country Code" := 'US';
+        AjShippingSetup."Post Order with Archive" := true;
+        AjShippingSetup."Download Label After Recieved" := true;
         if AjShippingSetup.Insert() then;
     end;
 

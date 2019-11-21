@@ -222,10 +222,10 @@ table 37072410 "AJ Shipping Header Arch."
         AJShippingSetup: Record "AJ Shipping Setup";
         NoSeriesManagement: Codeunit NoSeriesManagement;
     begin
+        AJShippingSetup.Get();
         if "No." = '' then begin
-            AJShippingSetup.Get();
-            AJShippingSetup.TestField("Shipping No. Series");
-            "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
+            AJShippingSetup.TestField("Arch. Shipping No. Series");
+            "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Arch. Shipping No. Series", WorkDate(), true);
         end;
     end;
 }

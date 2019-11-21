@@ -10,6 +10,10 @@ table 37072400 "AJ Shipping Setup"
         {
             TableRelation = "No. Series";
         }
+        field(3; "Arch. Shipping No. Series"; Code[20])
+        {
+            TableRelation = "No. Series";
+        }
         field(5; "Domestic Country Code"; Code[10])
         {
         }
@@ -37,6 +41,9 @@ table 37072400 "AJ Shipping Setup"
             OptionMembers = Default,Scalemanagement,Calculated;
         }
         field(45; "Post Order with Archive"; Boolean)
+        {
+        }
+        field(50; "Download Label After Recieved"; Boolean)
         {
         }
     }

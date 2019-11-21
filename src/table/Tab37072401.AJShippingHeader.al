@@ -230,6 +230,7 @@ table 37072401 "AJ Shipping Header"
             AJShippingSetup.Init();
 
         if "No." = '' then begin
+            AJShippingSetup.Get();
             AJShippingSetup.TestField("Shipping No. Series");
             "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
         end;

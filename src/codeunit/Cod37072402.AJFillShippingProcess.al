@@ -41,7 +41,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         SalesHeader: Record "Sales Header";
         AJShippingHeader: Record "AJ Shipping Header";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
-        Location: record Location;
+        Location: Record Location;
     begin
         SalesHeader.Get(AJShippingLine."Source Document Type" - 1, AJShippingLine."Source ID");
         AJShippingHeader.Get(AJShippingLine."Shipping No.");
@@ -440,6 +440,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
         Length: Decimal;
     begin
         SalesHeader.Get(RecordID);
+        SalesHeader."AJ Shipping No." := AJShippingHeader."No.";
+        SalesHeader.Modify();
+
         AJShippingCheck.CheckMultiLocationsForSales(SalesHeader);
 
         AJShippingLine2.Reset();

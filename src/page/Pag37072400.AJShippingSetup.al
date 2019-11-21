@@ -14,6 +14,10 @@ page 37072400 "AJ Shipping Setup"
                 {
                     ApplicationArea = All;
                 }
+                field("Arch. Shipping No. Series"; "Arch. Shipping No. Series")
+                {
+                    ApplicationArea = All;
+                }
                 field("Domestic Country Code"; "Domestic Country Code")
                 {
                     ApplicationArea = All;
@@ -38,7 +42,15 @@ page 37072400 "AJ Shipping Setup"
                 {
                     ApplicationArea = All;
                 }
+                field("Post Order with Archive"; "Post Order with Archive")
+                {
+                    ApplicationArea = All;
+                }
                 field("Change Ship Date in Order"; "Change Ship Date in Order")
+                {
+                    ApplicationArea = All;
+                }
+                field("Download Label After Recieved"; "Download Label After Recieved")
                 {
                     ApplicationArea = All;
                 }

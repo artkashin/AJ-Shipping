@@ -1,4 +1,4 @@
-tableextension 37072401 "TableExtansion9" extends "Country/Region"
+tableextension 37072401 "CountryRegionTableExtansion" extends "Country/Region"
 {
     fields
     {
