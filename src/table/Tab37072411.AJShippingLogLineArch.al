@@ -1,4 +1,4 @@
-table 37072411 "AJ Shipping Line Arch."
+table 37072411 "AJ Shipping Log Line Arch."
 {
     fields
     {

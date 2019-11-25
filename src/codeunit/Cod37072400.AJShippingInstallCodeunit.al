@@ -20,7 +20,7 @@ codeunit 37072400 "AJ Shipping InstallCodeunit"
     var
         NoSeries: Record "No. Series";
         NoSeriesLine: Record "No. Series Line";
-        AjShippingSetup: Record "AJ Shipping Setup";
+        AjShippingSetup: Record "AJ Shipping Log Setup";
     begin
         NoSeries.Init();
         NoSeries.Code := 'AJ-SHIP';

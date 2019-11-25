@@ -1,4 +1,4 @@
-table 37072400 "AJ Shipping Setup"
+table 37072400 "AJ Shipping Log Setup"
 {
 
     fields

@@ -1,9 +1,9 @@
-page 37072404 "AJ Customer Shipping Setup"
+page 37072404 "AJ Customer Shipping Log Setup"
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "AJ Customer Shipping Setup";
+    SourceTable = "AJ Customer Shipping Log Setup";
     layout
     {
         area(Content)

@@ -1,10 +1,10 @@
 codeunit 37072401 "AJ Shipping Process"
 {
-    procedure ArchiveShipping(AJShipHeader: Record "AJ Shipping Header")
+    procedure ArchiveShipping(AJShipHeader: Record "AJ Shipping Log")
     var
         SalesHeader: Record "Sales Header";
-        AJShipLine: Record "AJ Shipping Line";
-        AJShippingSetup: Record "AJ Shipping Setup";
+        AJShipLine: Record "AJ Shipping Log Line";
+        AJShippingSetup: Record "AJ Shipping Log Setup";
         GenGLpost: Codeunit "Gen. Jnl.-Post Preview";
         SalesPost: Codeunit "Sales-Post (Yes/No)";
     begin
@@ -23,11 +23,11 @@ codeunit 37072401 "AJ Shipping Process"
         MoveToArchive(AJShipHeader);
     end;
 
-    procedure MoveToArchive(AJShipHeader: Record "AJ Shipping Header")
+    procedure MoveToArchive(AJShipHeader: Record "AJ Shipping Log")
     var
-        AJShipLine: Record "AJ Shipping Line";
-        AJShipHeaderArch: Record "AJ Shipping Header Arch.";
-        AJShipLineArch: Record "AJ Shipping Line Arch.";
+        AJShipLine: Record "AJ Shipping Log Line";
+        AJShipHeaderArch: Record "AJ Shipping Log Arch.";
+        AJShipLineArch: Record "AJ Shipping Log Line Arch.";
     begin
         OnBeforeMovetoArchive(AJShipHeader);
 
@@ -53,7 +53,7 @@ codeunit 37072401 "AJ Shipping Process"
 
     procedure UpdateSourceDocument(ShipNo: Code[20])
     var
-        AJShipLineArch: Record "AJ Shipping Line Arch.";
+        AJShipLineArch: Record "AJ Shipping Log Line Arch.";
     begin
         AJShipLineArch.Reset();
         AJShipLineArch.SetRange("Shipping No.", ShipNo);
@@ -66,7 +66,7 @@ codeunit 37072401 "AJ Shipping Process"
             until AJShipLineArch.Next() = 0;
     end;
 
-    local procedure UpdateSalesHeader(AJShipLineArch: Record "AJ Shipping Line Arch.")
+    local procedure UpdateSalesHeader(AJShipLineArch: Record "AJ Shipping Log Line Arch.")
     var
         SalesHeader: Record "Sales Header";
     begin
@@ -76,14 +76,14 @@ codeunit 37072401 "AJ Shipping Process"
         SalesHeader.Modify();
     end;
 
-    procedure CreateShipping(AJShippingLine: Record "AJ Shipping Line"; RecordID: RecordId)
+    procedure CreateShipping(AJShippingLine: Record "AJ Shipping Log Line"; RecordID: RecordId)
     begin
         CreateBCShipping(AJShippingLine, RecordID);
     end;
 
-    local procedure CreateBCShipping(AJShipLine: Record "AJ Shipping Line"; RecordID: RecordId)
+    local procedure CreateBCShipping(AJShipLine: Record "AJ Shipping Log Line"; RecordID: RecordId)
     var
-        AJShipHeader: Record "AJ Shipping Header";
+        AJShipHeader: Record "AJ Shipping Log";
         AJFilShippingProcess: Codeunit "AJ Fill Shipping Process";
     begin
         AJShipSetup.Get();
@@ -112,16 +112,16 @@ codeunit 37072401 "AJ Shipping Process"
 
         // Populate hedaer fields from line      
         AJFilShippingProcess.PopulateShippingHeaderFromLine(AJShipLine, true);
-        if not ((AJShipLine."Source Table" = AJShipLine."Source Table"::"36")
-           and (AJShipLine."Source Document Type" = AJShipLine."Source Document Type"::Order)) then
-            Page.Run(0, AJShipHeader); // dodelat'
+        //if not ((AJShipLine."Source Table" = AJShipLine."Source Table"::"36")
+        //and (AJShipLine."Source Document Type" = AJShipLine."Source Document Type"::Order)) then
+        //Page.Run(0, AJShipHeader); // dodelat'
     end;
 
     [IntegrationEvent(true, false)]
-    local procedure OnBeforeMovetoArchive(var ShipHeader: Record "AJ Shipping Header")
+    local procedure OnBeforeMovetoArchive(var ShipHeader: Record "AJ Shipping Log")
     begin
     end;
 
     var
-        AJShipSetup: Record "AJ Shipping Setup";
+        AJShipSetup: Record "AJ Shipping Log Setup";
 }

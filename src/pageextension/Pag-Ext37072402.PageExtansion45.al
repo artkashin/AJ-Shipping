@@ -1,10 +1,10 @@
 pageextension 37072402 "PageExtansion45" extends "Sales List"
 {
     var
-        AJShippingLine: Record "AJ Shipping Line";
+        AJShippingLine: Record "AJ Shipping Log Line";
         LookupforAJShipping: Boolean;
 
-    procedure SetLookupForAJShipping(AJShippingLine2: Record "AJ Shipping Line")
+    procedure SetLookupForAJShipping(AJShippingLine2: Record "AJ Shipping Log Line")
     begin
         LookupforAJShipping := true;
         AJShippingLine := AJShippingLine2;
@@ -13,7 +13,7 @@ pageextension 37072402 "PageExtansion45" extends "Sales List"
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
         FromSalesHeader: Record "Sales Header";
-        AJShippingHeader: Record "AJ Shipping Header";
+        AJShippingHeader: Record "AJ Shipping Log";
         AJFillShippingLine: Codeunit "AJ Fill Shipping Process";
         AJShippingCheck: Codeunit "AJ Shipping Check";
         HaveBadDocuments: Boolean;
@@ -36,7 +36,7 @@ pageextension 37072402 "PageExtansion45" extends "Sales List"
                 until FromSalesHeader.Next() = 0;
 
             if HaveBadDocuments then
-                Message('Lines with a document type "Return Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Setup')
+                Message('Lines with a document type "Return Order" were not inserted, because the corresponding setting is not enabled in AJ Shipping Log Setup')
         end;
     end;
 }

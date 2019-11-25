@@ -1,7 +1,7 @@
-table 37072410 "AJ Shipping Header Arch."
+table 37072410 "AJ Shipping Log Arch."
 {
-    DrillDownPageId = "AJ Shipping Arch. Card";
-    LookupPageId = "AJ Shipping Arch. Card";
+    DrillDownPageId = "AJ Shipping Log Arch.";
+    LookupPageId = "AJ Shipping Log Arch.";
     fields
     {
         field(1; "No."; Code[20])
@@ -202,7 +202,7 @@ table 37072410 "AJ Shipping Header Arch."
         }
         field(180; "Total Quantity"; Decimal)
         {
-            CalcFormula = Sum ("AJ Shipping Line Arch.".Quantity WHERE("Shipping No." = FIELD("No.")));
+            CalcFormula = Sum ("AJ Shipping Log Line Arch.".Quantity WHERE("Shipping No." = FIELD("No.")));
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
@@ -219,7 +219,7 @@ table 37072410 "AJ Shipping Header Arch."
 
     trigger OnInsert()
     var
-        AJShippingSetup: Record "AJ Shipping Setup";
+        AJShippingSetup: Record "AJ Shipping Log Setup";
         NoSeriesManagement: Codeunit NoSeriesManagement;
     begin
         AJShippingSetup.Get();

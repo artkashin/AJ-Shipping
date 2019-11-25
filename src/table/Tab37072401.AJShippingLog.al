@@ -1,7 +1,7 @@
-table 37072401 "AJ Shipping Header"
+table 37072401 "AJ Shipping Log"
 {
-    DrillDownPageId = "AJ Shipping Card";
-    LookupPageId = "AJ Shipping Card";
+    DrillDownPageId = "AJ Shipping Log";
+    LookupPageId = "AJ Shipping Log";
     fields
     {
         field(1; "No."; Code[20])
@@ -207,7 +207,7 @@ table 37072401 "AJ Shipping Header"
         }
         field(180; "Total Quantity"; Decimal)
         {
-            CalcFormula = Sum ("AJ Shipping Line".Quantity WHERE("Shipping No." = FIELD("No.")));
+            CalcFormula = Sum ("AJ Shipping Log Line".Quantity WHERE("Shipping No." = FIELD("No.")));
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
@@ -245,7 +245,7 @@ table 37072401 "AJ Shipping Header"
 
     trigger OnDelete()
     var
-        AJShipLine: Record "AJ Shipping Line";
+        AJShipLine: Record "AJ Shipping Log Line";
     begin
         AJShipLine.Reset();
         AJShipLine.SetRange("Shipping No.", "No.");
@@ -254,6 +254,6 @@ table 37072401 "AJ Shipping Header"
     end;
 
     var
-        AJShippingSetup: Record "AJ Shipping Setup";
+        AJShippingSetup: Record "AJ Shipping Log Setup";
 }
 

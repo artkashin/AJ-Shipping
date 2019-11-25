@@ -15,8 +15,8 @@ pageextension 37072408 "PageExtansion5740" extends "Transfer Order"
                     ApplicationArea = all;
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
-                        AJShippingHeader: Record "AJ Shipping Header";
+                        AJShippingLine: Record "AJ Shipping Log Line";
+                        AJShippingHeader: Record "AJ Shipping Log";
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                     begin
                         AJShippingLine.Reset();
@@ -24,7 +24,7 @@ pageextension 37072408 "PageExtansion5740" extends "Transfer Order"
                         AJShippingLine.SetRange("Source ID", "No.");
                         if AJShippingLine.FindFirst() then begin
                             AJShippingHeader.get(AJShippingLine."Shipping No.");
-                            if Confirm('AJ Shipping Header already exists for this order \\ would you like to open it?') then
+                            if Confirm('AJ Shipping Log already exists for this order \\ would you like to open it?') then
                                 Page.Run(0, AJShippingHeader);
                         end
                         else

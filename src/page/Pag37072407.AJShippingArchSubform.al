@@ -2,7 +2,7 @@ page 37072407 "AJ Shipping Arch. Subform"
 {
     DeleteAllowed = true;
     PageType = ListPart;
-    SourceTable = "AJ Shipping Line Arch.";
+    SourceTable = "AJ Shipping Log Line Arch.";
     Editable = false;
     layout
     {

@@ -1,9 +1,9 @@
-page 37072402 "AJ Shipping Card"
+page 37072402 "AJ Shipping Log"
 {
     PageType = Document;
     PopulateAllFields = true;
     RefreshOnActivate = true;
-    SourceTable = "AJ Shipping Header";
+    SourceTable = "AJ Shipping Log";
     layout
     {
         area(content)
@@ -275,7 +275,7 @@ page 37072402 "AJ Shipping Card"
                     ShowMandatory = true;
                 }
             }
-            part(Control1000000043; "AJ Shipping Subform")
+            part(Control1000000043; "AJ Shipping Log Subform")
             {
                 ApplicationArea = All;
                 Caption = 'Lines';
@@ -318,7 +318,7 @@ page 37072402 "AJ Shipping Card"
                     Caption = 'Get Lines From Sales';
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
+                        AJShippingLine: Record "AJ Shipping Log Line";
                         SalesHeader: Record "Sales Header";
                         SalesList: Page "Sales List";
                     begin
@@ -342,7 +342,7 @@ page 37072402 "AJ Shipping Card"
                     Caption = 'Get Lines From Sales Shipments';
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
+                        AJShippingLine: Record "AJ Shipping Log Line";
                         SalesShpHeader: Record "Sales Shipment Header";
                         SalesShipmet: Page "Posted Sales Shipments";
                     begin
@@ -364,7 +364,7 @@ page 37072402 "AJ Shipping Card"
                     Caption = 'Get Lines From Purchases';
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
+                        AJShippingLine: Record "AJ Shipping Log Line";
                         PurchaseHeader: Record "Purchase Header";
                         PurchList: Page "Purchase List";
                     begin
@@ -386,7 +386,7 @@ page 37072402 "AJ Shipping Card"
                     Caption = 'Get Lines From Transfer Orders';
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
+                        AJShippingLine: Record "AJ Shipping Log Line";
                         TransferHeader: Record "Transfer Header";
                         TransferOrders: Page "Transfer Orders";
                     begin
@@ -409,7 +409,7 @@ page 37072402 "AJ Shipping Card"
                     Caption = 'Get Lines From Posted Sales Invoices';
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
+                        AJShippingLine: Record "AJ Shipping Log Line";
                         SalesInvoices: Page "Posted Sales Invoices";
                     begin
                         AJShippingLine."Shipping No." := Rec."No.";
@@ -427,7 +427,7 @@ page 37072402 "AJ Shipping Card"
                     Caption = 'Get Lines From Transfer Shipments';
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
+                        AJShippingLine: Record "AJ Shipping Log Line";
                         TransferShipments: Page "Posted Transfer Shipments";
                     begin
                         AJShippingLine."Shipping No." := Rec."No.";

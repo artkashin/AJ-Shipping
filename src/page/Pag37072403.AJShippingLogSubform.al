@@ -1,8 +1,8 @@
-page 37072403 "AJ Shipping Subform"
+page 37072403 "AJ Shipping Log Subform"
 {
     DeleteAllowed = true;
     PageType = ListPart;
-    SourceTable = "AJ Shipping Line";
+    SourceTable = "AJ Shipping Log Line";
 
     layout
     {

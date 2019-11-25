@@ -9,11 +9,11 @@ tableextension 37072411 "SalesInvoiceHeaderExtension" extends "Sales Invoice Hea
         }
         field(37072401; "AJ Shipping No."; Code[20])
         {
-            TableRelation = "AJ Shipping Header";
+            TableRelation = "AJ Shipping Log";
         }
         field(37072402; "AJ Shipping No. Arch."; Code[20])
         {
-            TableRelation = "AJ Shipping Header Arch.";
+            TableRelation = "AJ Shipping Log Arch.";
         }
     }
 }

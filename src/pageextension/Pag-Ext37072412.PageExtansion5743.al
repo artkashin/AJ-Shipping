@@ -15,10 +15,10 @@ pageextension 37072412 "PageExtansion5743" extends "Posted Transfer Shipment"
                     ApplicationArea = all;
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Line";
-                        AJShippingHeader: Record "AJ Shipping Header";
-                        AJShippingHeaderArch: Record "AJ Shipping Header Arch.";
-                        AJShipLineArch: Record "AJ Shipping Line Arch.";
+                        AJShippingLine: Record "AJ Shipping Log Line";
+                        AJShippingHeader: Record "AJ Shipping Log";
+                        AJShippingHeaderArch: Record "AJ Shipping Log Arch.";
+                        AJShipLineArch: Record "AJ Shipping Log Line Arch.";
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                     begin
                         AJShipLineArch.Reset();
@@ -26,7 +26,7 @@ pageextension 37072412 "PageExtansion5743" extends "Posted Transfer Shipment"
                         AJShipLineArch.SetRange("Source ID", "No.");
                         if AJShipLineArch.FindFirst() then begin
                             AJShippingHeaderArch.get(AJShipLineArch."Shipping No.");
-                            if Confirm('AJ Shipping Header already exists for this order \\ would you like to open it?') then
+                            if Confirm('AJ Shipping Log already exists for this order \\ would you like to open it?') then
                                 Page.Run(0, AJShippingHeaderArch);
                         end else begin
                             AJShippingLine.Reset();
@@ -34,7 +34,7 @@ pageextension 37072412 "PageExtansion5743" extends "Posted Transfer Shipment"
                             AJShippingLine.SetRange("Source ID", "No.");
                             if AJShippingLine.FindFirst() then begin
                                 AJShippingHeader.get(AJShippingLine."Shipping No.");
-                                if Confirm('AJ Shipping Header already exists for this order \\ would you like to open it?') then
+                                if Confirm('AJ Shipping Log already exists for this order \\ would you like to open it?') then
                                     Page.Run(0, AJShippingHeader);
                             end
                             else

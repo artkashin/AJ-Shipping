@@ -14,7 +14,7 @@ codeunit 37072403 "AJ Shipping Check"
         Allow := AJSHippingSetup."Allow Crt. Not Purchase Return";
     end;
 
-    procedure PossibleGetLines(AJShippingHeader: Record "AJ Shipping Header")
+    procedure PossibleGetLines(AJShippingHeader: Record "AJ Shipping Log")
     var
     begin
         if not AJShippingHeader."B2C Shipping" then
@@ -40,21 +40,21 @@ codeunit 37072403 "AJ Shipping Check"
         end;
     end;
 
-    procedure ReadyForArchive(AJShipHeader: Record "AJ Shipping Header")
+    procedure ReadyForArchive(AJShipHeader: Record "AJ Shipping Log")
     var
     begin
         //AJShipHeader.TestField("");
         AJSHippingSetup.Get();
     end;
 
-    procedure AddLineInShippingAllowed(AJShipLine: Record "AJ Shipping Line")
+    procedure AddLineInShippingAllowed(AJShipLine: Record "AJ Shipping Log Line")
     var
-        AJShipHeader: Record "AJ Shipping Header";
+        AJShipHeader: Record "AJ Shipping Log";
     begin
         AJSHippingSetup.Get();
         AJShipHeader.Get(AJShipLine."Shipping No.");
         if AJShipHeader."B2C Shipping" and not (AJSHippingSetup."Allow Add Lines With B2C") then
-            Error('You cannot add lines to this document, because the setting "Allow Add Lines With B2C" in AJ Shipping Setup is not enabled');
+            Error('You cannot add lines to this document, because the setting "Allow Add Lines With B2C" in AJ Shipping Log Setup is not enabled');
     end;
 
     procedure CheckMultiLocationsForSales(SalesHeader: Record "Sales Header")
@@ -77,9 +77,8 @@ codeunit 37072403 "AJ Shipping Check"
         end;
     end;
 
-    procedure CheckTransferBeforaCreateShipping(TransferHeader: Record "Transfer Header")
+    procedure CheckTransferBeforeCreateShipping(TransferHeader: Record "Transfer Header")
     var
-        TransferLine: Record "Transfer Line";
     begin
         TransferHeader.TestField("Transfer-from Code");
         //TransferLine.Reset();
@@ -106,5 +105,5 @@ codeunit 37072403 "AJ Shipping Check"
     end;
 
     var
-        AJSHippingSetup: Record "AJ Shipping Setup";
+        AJSHippingSetup: Record "AJ Shipping Log Setup";
 }

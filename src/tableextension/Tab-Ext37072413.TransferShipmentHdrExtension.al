@@ -1,4 +1,4 @@
-tableextension 37072402 "SalesHeaderTableExtension" extends "Sales Header"
+tableextension 37072413 "TransferShipmentHdrExtension" extends "Transfer Shipment Header"
 {
     fields
     {
@@ -9,11 +9,11 @@ tableextension 37072402 "SalesHeaderTableExtension" extends "Sales Header"
         }
         field(37072401; "AJ Shipping No."; Code[20])
         {
-            TableRelation = "AJ Shipping Header";
+            TableRelation = "AJ Shipping Log";
         }
         field(37072402; "AJ Shipping No. Arch."; Code[20])
         {
-            TableRelation = "AJ Shipping Header Arch.";
+            TableRelation = "AJ Shipping Log Arch.";
         }
     }
 }
