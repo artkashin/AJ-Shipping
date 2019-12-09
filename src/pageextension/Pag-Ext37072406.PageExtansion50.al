@@ -15,9 +15,9 @@ pageextension 37072406 "PageExtansion50" extends "Purchase Order"
                     ApplicationArea = all;
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Log Line";
-                        AJShippingHeader: Record "AJ Shipping Log";
-                        AJShippingHeaderArch: Record "AJ Shipping Log Arch.";
+                        AJShippingLine: Record "AJE Shipping Log Line";
+                        AJShippingHeader: Record "AJE Shipping Log";
+                        AJShippingHeaderArch: Record "AJE Shipping Log Arch.";
                         AJShipLineArch: Record "AJ Shipping Log Line Arch.";
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                         AJShippingCheck: Codeunit "AJ Shipping Check";

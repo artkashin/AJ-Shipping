@@ -1,16 +1,16 @@
-page 37072400 "AJ Shipping Log Setup"
+page 37072400 "AJE Shipping Log Setup"
 {
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "AJ Shipping Log Setup";
+    SourceTable = "AJE Shipping Log Setup";
     layout
     {
         area(Content)
         {
             group(General)
             {
-                field("Shipping No. Series"; "Shipping No. Series")
+                field("Shipping Log No. Series"; "Shipping Log No. Series")
                 {
                     ApplicationArea = All;
                 }

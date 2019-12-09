@@ -2,7 +2,7 @@ page 37072403 "AJ Shipping Log Subform"
 {
     DeleteAllowed = true;
     PageType = ListPart;
-    SourceTable = "AJ Shipping Log Line";
+    SourceTable = "AJE Shipping Log Line";
 
     layout
     {

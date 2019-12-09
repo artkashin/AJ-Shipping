@@ -1,7 +1,7 @@
-table 37072410 "AJ Shipping Log Arch."
+table 37072410 "AJE Shipping Log Arch."
 {
-    DrillDownPageId = "AJ Shipping Log Arch.";
-    LookupPageId = "AJ Shipping Log Arch.";
+    DrillDownPageId = "AJE Shipping Log Arch.";
+    LookupPageId = "AJE Shipping Log Arch.";
     fields
     {
         field(1; "No."; Code[20])
@@ -219,7 +219,7 @@ table 37072410 "AJ Shipping Log Arch."
 
     trigger OnInsert()
     var
-        AJShippingSetup: Record "AJ Shipping Log Setup";
+        AJShippingSetup: Record "AJE Shipping Log Setup";
         NoSeriesManagement: Codeunit NoSeriesManagement;
     begin
         AJShippingSetup.Get();

@@ -2,6 +2,23 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Local sandbox",
+            "type": "al",
+            "request": "launch",
+            "server": "http://navtestboris",
+            "serverInstance": "BC",
+            "authentication": "Windows",
+            "startupObjectId": 130401,
+            "breakOnError": true,
+            "breakOnRecordWrite": false,
+            "launchBrowser": true,
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10,
+            "schemaUpdateMode": "Recreate",
+        },
+        {
             "type": "al",
             "request": "launch",
             "name": "Microsoft cloud sandbox",

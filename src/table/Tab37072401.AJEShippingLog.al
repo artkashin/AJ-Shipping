@@ -1,7 +1,7 @@
-table 37072401 "AJ Shipping Log"
+table 37072401 "AJE Shipping Log"
 {
-    DrillDownPageId = "AJ Shipping Log";
-    LookupPageId = "AJ Shipping Log";
+    DrillDownPageId = "AJE Shipping Log";
+    LookupPageId = "AJE Shipping Log";
     fields
     {
         field(1; "No."; Code[20])
@@ -207,7 +207,7 @@ table 37072401 "AJ Shipping Log"
         }
         field(180; "Total Quantity"; Decimal)
         {
-            CalcFormula = Sum ("AJ Shipping Log Line".Quantity WHERE("Shipping No." = FIELD("No.")));
+            CalcFormula = Sum ("AJE Shipping Log Line".Quantity WHERE("Shipping No." = FIELD("No.")));
             DecimalPlaces = 0 : 2;
             Editable = false;
             FieldClass = FlowField;
@@ -231,8 +231,8 @@ table 37072401 "AJ Shipping Log"
 
         if "No." = '' then begin
             AJShippingSetup.Get();
-            AJShippingSetup.TestField("Shipping No. Series");
-            "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping No. Series", WorkDate(), true);
+            AJShippingSetup.TestField("Shipping Log No. Series");
+            "No." := NoSeriesManagement.GetNextNo(AJShippingSetup."Shipping Log No. Series", WorkDate(), true);
         end;
 
         if "Ship Date" < Today() then begin
@@ -245,7 +245,7 @@ table 37072401 "AJ Shipping Log"
 
     trigger OnDelete()
     var
-        AJShipLine: Record "AJ Shipping Log Line";
+        AJShipLine: Record "AJE Shipping Log Line";
     begin
         AJShipLine.Reset();
         AJShipLine.SetRange("Shipping No.", "No.");
@@ -254,6 +254,6 @@ table 37072401 "AJ Shipping Log"
     end;
 
     var
-        AJShippingSetup: Record "AJ Shipping Log Setup";
+        AJShippingSetup: Record "AJE Shipping Log Setup";
 }
 

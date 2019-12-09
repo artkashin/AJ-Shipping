@@ -1,4 +1,4 @@
-table 37072400 "AJ Shipping Log Setup"
+table 37072400 "AJE Shipping Log Setup"
 {
 
     fields
@@ -6,11 +6,11 @@ table 37072400 "AJ Shipping Log Setup"
         field(1; ID; Code[10])
         {
         }
-        field(2; "Shipping No. Series"; Code[20])
+        field(2; "Shipping Log No. Series"; Code[20])
         {
             TableRelation = "No. Series";
         }
-        field(3; "Arch. Shipping No. Series"; Code[20])
+        field(3; "Arch. Shipping Log No. Series"; Code[20])
         {
             TableRelation = "No. Series";
         }

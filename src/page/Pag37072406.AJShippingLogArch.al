@@ -1,9 +1,9 @@
-page 37072406 "AJ Shipping Log Arch."
+page 37072406 "AJE Shipping Log Arch."
 {
     PageType = Document;
     PopulateAllFields = true;
     RefreshOnActivate = true;
-    SourceTable = "AJ Shipping Log Arch.";
+    SourceTable = "AJE Shipping Log Arch.";
     Editable = false;
 
     layout

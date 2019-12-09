@@ -4,7 +4,7 @@
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforePostSalesDoc', '', true, true)]
     procedure FindShipment(VAR SalesHeader: Record "Sales Header")
     var
-        AJShipmentLine: Record "AJ Shipping Log Line";
+        AJShipmentLine: Record "AJE Shipping Log Line";
     begin
         AJShipmentLine.Reset();
         AJShipmentLine.SetRange("Source ID", SalesHeader."No.");

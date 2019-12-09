@@ -14,7 +14,7 @@ codeunit 37072403 "AJ Shipping Check"
         Allow := AJSHippingSetup."Allow Crt. Not Purchase Return";
     end;
 
-    procedure PossibleGetLines(AJShippingHeader: Record "AJ Shipping Log")
+    procedure PossibleGetLines(AJShippingHeader: Record "AJE Shipping Log")
     var
     begin
         if not AJShippingHeader."B2C Shipping" then
@@ -40,16 +40,16 @@ codeunit 37072403 "AJ Shipping Check"
         end;
     end;
 
-    procedure ReadyForArchive(AJShipHeader: Record "AJ Shipping Log")
+    procedure ReadyForArchive(AJShipHeader: Record "AJE Shipping Log")
     var
     begin
         //AJShipHeader.TestField("");
         AJSHippingSetup.Get();
     end;
 
-    procedure AddLineInShippingAllowed(AJShipLine: Record "AJ Shipping Log Line")
+    procedure AddLineInShippingAllowed(AJShipLine: Record "AJE Shipping Log Line")
     var
-        AJShipHeader: Record "AJ Shipping Log";
+        AJShipHeader: Record "AJE Shipping Log";
     begin
         AJSHippingSetup.Get();
         AJShipHeader.Get(AJShipLine."Shipping No.");
@@ -105,5 +105,5 @@ codeunit 37072403 "AJ Shipping Check"
     end;
 
     var
-        AJSHippingSetup: Record "AJ Shipping Log Setup";
+        AJSHippingSetup: Record "AJE Shipping Log Setup";
 }

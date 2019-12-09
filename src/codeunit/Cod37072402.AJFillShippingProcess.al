@@ -1,6 +1,6 @@
 codeunit 37072402 "AJ Fill Shipping Process"
 {
-    procedure PopulateShippingHeaderFromLine(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    procedure PopulateShippingHeaderFromLine(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     begin
         case AJShippingLine."Source Table" of
             AJShippingLine."Source Table"::"36":
@@ -18,7 +18,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         end;
     end;
 
-    procedure PopulateFromLocation(AJShippingHeader: Record "AJ Shipping Log")
+    procedure PopulateFromLocation(AJShippingHeader: Record "AJE Shipping Log")
     var
         Location: record Location;
     begin
@@ -36,10 +36,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         end;
     end;
 
-    local procedure PopulateFromSalesHeader(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromSalesHeader(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     var
         SalesHeader: Record "Sales Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
     begin
         SalesHeader.Get(AJShippingLine."Source Document Type" - 1, AJShippingLine."Source ID");
@@ -80,10 +80,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromSalesInvoice(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromSalesInvoice(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     var
         SalesInvHeader: Record "Sales Invoice Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         Location: record Location;
     begin
@@ -139,10 +139,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromSalesShipment(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromSalesShipment(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     var
         SalesShipmentHeader: Record "Sales Shipment Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         Location: Record Location;
     begin
@@ -199,7 +199,7 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromPurchaseHeader(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromPurchaseHeader(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     begin
         case AJShippingLine."Source Document Type" of
             AJShippingLine."Source Document Type"::"Return Order":
@@ -211,10 +211,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         end;
     end;
 
-    local procedure PopulateFromPurchaseHeaderOrder(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromPurchaseHeaderOrder(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     var
         PurchaseHeader: Record "Purchase Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         Location: record Location;
     begin
@@ -270,10 +270,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromPurchaseHeaderReturn(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromPurchaseHeaderReturn(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     var
         PurchaseHeader: Record "Purchase Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         Location: Record Location;
     begin
@@ -329,10 +329,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromTransferHeader(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromTransferHeader(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     var
         TransferHeader: Record "Transfer Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         Location: record Location;
         AJShippingCheck: Codeunit "AJ Shipping Check";
     begin
@@ -378,10 +378,10 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    local procedure PopulateFromTransferShipment(AJShippingLine: Record "AJ Shipping Log Line"; ChangeShipFrom: Boolean)
+    local procedure PopulateFromTransferShipment(AJShippingLine: Record "AJE Shipping Log Line"; ChangeShipFrom: Boolean)
     var
         TransferShipHeader: Record "Transfer Shipment Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         Location: record Location;
     begin
         TransferShipHeader.Get(AJShippingLine."Source ID");
@@ -425,9 +425,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingHeader.Modify(true);
     end;
 
-    procedure CreateLineFromSalesHeader(RecordID: RecordId; AJShippingHeader: Record "AJ Shipping Log"; var AJShippingLine: Record "AJ Shipping Log Line")
+    procedure CreateLineFromSalesHeader(RecordID: RecordId; AJShippingHeader: Record "AJE Shipping Log"; var AJShippingLine: Record "AJE Shipping Log Line")
     var
-        AJShippingLine2: Record "AJ Shipping Log Line";
+        AJShippingLine2: Record "AJE Shipping Log Line";
         SalesHeader: Record "Sales Header";
         SalesLine: Record "Sales Line";
         Item: Record Item;
@@ -494,9 +494,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingLine.Insert();
     end;
 
-    procedure CreateLineFromPurchaseHeader(RecordID: RecordId; AJShippingHeader: Record "AJ Shipping Log"; var AJShippingLine: Record "AJ Shipping Log Line")
+    procedure CreateLineFromPurchaseHeader(RecordID: RecordId; AJShippingHeader: Record "AJE Shipping Log"; var AJShippingLine: Record "AJE Shipping Log Line")
     var
-        AJShippingLine2: Record "AJ Shipping Log Line";
+        AJShippingLine2: Record "AJE Shipping Log Line";
         PurchaseHeader: Record "Purchase Header";
         AJShippingCheck: Codeunit "AJ Shipping Check";
     begin
@@ -526,9 +526,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingLine.Insert();
     end;
 
-    procedure CreateLineFromSalesInvHeader(RecordID: RecordId; AJShippingHeader: Record "AJ Shipping Log"; var AJShippingLine: Record "AJ Shipping Log Line")
+    procedure CreateLineFromSalesInvHeader(RecordID: RecordId; AJShippingHeader: Record "AJE Shipping Log"; var AJShippingLine: Record "AJE Shipping Log Line")
     var
-        AJShippingLine2: Record "AJ Shipping Log Line";
+        AJShippingLine2: Record "AJE Shipping Log Line";
         SalesInvHeader: Record "Sales Invoice Header";
     begin
         SalesInvHeader.Get(RecordID);
@@ -557,9 +557,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
 
     end;
 
-    procedure CreateLineFromSalesShipHeader(RecordID: RecordId; AJShippingHeader: Record "AJ Shipping Log"; var AJShippingLine: Record "AJ Shipping Log Line")
+    procedure CreateLineFromSalesShipHeader(RecordID: RecordId; AJShippingHeader: Record "AJE Shipping Log"; var AJShippingLine: Record "AJE Shipping Log Line")
     var
-        AJShippingLine2: Record "AJ Shipping Log Line";
+        AJShippingLine2: Record "AJE Shipping Log Line";
         SalesShpHeader: Record "Sales Shipment Header";
         AJShippingCheck: Codeunit "AJ Shipping Check";
     begin
@@ -589,9 +589,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingLine.Insert();
     end;
 
-    procedure CreateLineFromTransferHeader(RecordID: RecordId; AJShippingHeader: Record "AJ Shipping Log"; var AJShippingLine: Record "AJ Shipping Log Line")
+    procedure CreateLineFromTransferHeader(RecordID: RecordId; AJShippingHeader: Record "AJE Shipping Log"; var AJShippingLine: Record "AJE Shipping Log Line")
     var
-        AJShippingLine2: Record "AJ Shipping Log Line";
+        AJShippingLine2: Record "AJE Shipping Log Line";
         TransferHeader: Record "Transfer Header";
     begin
         TransferHeader.Get(RecordID);
@@ -620,9 +620,9 @@ codeunit 37072402 "AJ Fill Shipping Process"
         AJShippingLine.Insert();
     end;
 
-    procedure CreateLineFromTransferShpHeader(RecordID: RecordId; AJShippingHeader: Record "AJ Shipping Log"; var AJShippingLine: Record "AJ Shipping Log Line")
+    procedure CreateLineFromTransferShpHeader(RecordID: RecordId; AJShippingHeader: Record "AJE Shipping Log"; var AJShippingLine: Record "AJE Shipping Log Line")
     var
-        AJShippingLine2: Record "AJ Shipping Log Line";
+        AJShippingLine2: Record "AJE Shipping Log Line";
         TransferShpHeader: Record "Transfer Shipment Header";
     begin
         TransferShpHeader.Get(RecordID);

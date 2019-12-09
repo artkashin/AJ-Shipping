@@ -15,8 +15,8 @@ pageextension 37072408 "PageExtansion5740" extends "Transfer Order"
                     ApplicationArea = all;
                     trigger OnAction()
                     var
-                        AJShippingLine: Record "AJ Shipping Log Line";
-                        AJShippingHeader: Record "AJ Shipping Log";
+                        AJShippingLine: Record "AJE Shipping Log Line";
+                        AJShippingHeader: Record "AJE Shipping Log";
                         AJShippingProcess: Codeunit "AJ Shipping Process";
                     begin
                         AJShippingLine.Reset();

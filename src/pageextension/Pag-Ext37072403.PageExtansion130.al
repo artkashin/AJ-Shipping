@@ -1,10 +1,10 @@
 pageextension 37072403 "PageExtansion130" extends "Posted Sales Shipments"
 {
     var
-        AJShippingLine: Record "AJ Shipping Log Line";
+        AJShippingLine: Record "AJE Shipping Log Line";
         LookupforAJShipping: Boolean;
 
-    procedure SetLookupForAJShipping(AJShippingLine2: Record "AJ Shipping Log Line")
+    procedure SetLookupForAJShipping(AJShippingLine2: Record "AJE Shipping Log Line")
     begin
         LookupforAJShipping := true;
         AJShippingLine := AJShippingLine2;
@@ -13,7 +13,7 @@ pageextension 37072403 "PageExtansion130" extends "Posted Sales Shipments"
     trigger OnQueryClosePage(CloseAction: Action): Boolean
     var
         FromSalesShipHeader: Record "Sales Shipment Header";
-        AJShippingHeader: Record "AJ Shipping Log";
+        AJShippingHeader: Record "AJE Shipping Log";
         AJFillShippingLine: Codeunit "AJ Fill Shipping Process";
     begin
         if LookupforAJShipping and (CloseAction = Action::LookupOK) then begin

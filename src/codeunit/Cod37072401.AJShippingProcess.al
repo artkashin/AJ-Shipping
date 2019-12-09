@@ -1,10 +1,10 @@
 codeunit 37072401 "AJ Shipping Process"
 {
-    procedure ArchiveShipping(AJShipHeader: Record "AJ Shipping Log")
+    procedure ArchiveShipping(AJShipHeader: Record "AJE Shipping Log")
     var
         SalesHeader: Record "Sales Header";
-        AJShipLine: Record "AJ Shipping Log Line";
-        AJShippingSetup: Record "AJ Shipping Log Setup";
+        AJShipLine: Record "AJE Shipping Log Line";
+        AJShippingSetup: Record "AJE Shipping Log Setup";
         GenGLpost: Codeunit "Gen. Jnl.-Post Preview";
         SalesPost: Codeunit "Sales-Post (Yes/No)";
     begin
@@ -23,10 +23,10 @@ codeunit 37072401 "AJ Shipping Process"
         MoveToArchive(AJShipHeader);
     end;
 
-    procedure MoveToArchive(AJShipHeader: Record "AJ Shipping Log")
+    procedure MoveToArchive(AJShipHeader: Record "AJE Shipping Log")
     var
-        AJShipLine: Record "AJ Shipping Log Line";
-        AJShipHeaderArch: Record "AJ Shipping Log Arch.";
+        AJShipLine: Record "AJE Shipping Log Line";
+        AJShipHeaderArch: Record "AJE Shipping Log Arch.";
         AJShipLineArch: Record "AJ Shipping Log Line Arch.";
     begin
         OnBeforeMovetoArchive(AJShipHeader);
@@ -76,14 +76,14 @@ codeunit 37072401 "AJ Shipping Process"
         SalesHeader.Modify();
     end;
 
-    procedure CreateShipping(AJShippingLine: Record "AJ Shipping Log Line"; RecordID: RecordId)
+    procedure CreateShipping(AJShippingLine: Record "AJE Shipping Log Line"; RecordID: RecordId)
     begin
         CreateBCShipping(AJShippingLine, RecordID);
     end;
 
-    local procedure CreateBCShipping(AJShipLine: Record "AJ Shipping Log Line"; RecordID: RecordId)
+    local procedure CreateBCShipping(AJShipLine: Record "AJE Shipping Log Line"; RecordID: RecordId)
     var
-        AJShipHeader: Record "AJ Shipping Log";
+        AJShipHeader: Record "AJE Shipping Log";
         AJFilShippingProcess: Codeunit "AJ Fill Shipping Process";
     begin
         AJShipSetup.Get();
@@ -118,10 +118,10 @@ codeunit 37072401 "AJ Shipping Process"
     end;
 
     [IntegrationEvent(true, false)]
-    local procedure OnBeforeMovetoArchive(var ShipHeader: Record "AJ Shipping Log")
+    local procedure OnBeforeMovetoArchive(var ShipHeader: Record "AJE Shipping Log")
     begin
     end;
 
     var
-        AJShipSetup: Record "AJ Shipping Log Setup";
+        AJShipSetup: Record "AJE Shipping Log Setup";
 }

@@ -1,4 +1,4 @@
-table 37072402 "AJ Shipping Log Line"
+table 37072402 "AJE Shipping Log Line"
 {
     fields
     {
@@ -63,7 +63,7 @@ table 37072402 "AJ Shipping Log Line"
     }
     trigger OnInsert()
     var
-        AJShipLine: Record "AJ Shipping Log Line";
+        AJShipLine: Record "AJE Shipping Log Line";
     begin
         AJShipLine.Reset();
         AJShipLine.SetRange("Shipping No.", "Shipping No.");
